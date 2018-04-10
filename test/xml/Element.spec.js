@@ -15,4 +15,22 @@ describe('XML Element', () => {
     expect(new Element('p', { style: 'color: red;' }, 'hello world').toString()).toBe('<p style="color: red;">hello world</p>')
     expect(new Element('p', { style: 'color: red;' }, ['before', new Element('span', null, 'hello world'), 'after']).toString()).toBe('<p style="color: red;">before<span>hello world</span>after</p>')
   })
+
+  test('set attribute', () => {
+    const element = new Element('div')
+    expect(element.toString()).toBe('<div></div>')
+    element.set('class', 'a')
+    expect(element.toString()).toBe('<div class="a"></div>')
+    element.set('style', 'color: red;')
+    expect(element.toString()).toBe('<div class="a" style="color: red;"></div>')
+  })
+
+  test('add children', () => {
+    const element = new Element('div')
+    expect(element.toString()).toBe('<div></div>')
+    element.add('hello')
+    expect(element.toString()).toBe('<div>hello</div>')
+    element.add(new Element('p', undefined, 'world'))
+    expect(element.toString()).toBe('<div>hello<p>world</p></div>')
+  })
 })

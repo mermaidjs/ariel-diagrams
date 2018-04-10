@@ -7,7 +7,26 @@ class Element {
     this.elementList = elementList
   }
 
-  attributesString () {
+  set (key, value) {
+    if (R.isNil(this.attributes)) {
+      this.attributes = {}
+    }
+    this.attributes[key] = value
+    return this
+  }
+
+  add (element) {
+    if (R.isNil(this.elementList)) {
+      this.elementList = []
+    }
+    if (!Array.isArray(this.elementList)) {
+      this.elementList = [this.elementList]
+    }
+    this.elementList.push(element)
+    return this
+  }
+
+  _attributesString () {
     if (R.isNil(this.attributes) || R.isEmpty(this.attributes)) {
       return ''
     }
@@ -21,7 +40,7 @@ class Element {
     )(this.attributes)
   }
 
-  elementListString () {
+  _elementListString () {
     if (R.isNil(this.elementList) || R.isEmpty(this.elementList)) {
       return ''
     }
@@ -32,7 +51,7 @@ class Element {
   }
 
   toString () {
-    return `<${this.tagName}${this.attributesString()}>${this.elementListString()}</${this.tagName}>`
+    return `<${this.tagName}${this._attributesString()}>${this._elementListString()}</${this.tagName}>`
   }
 }
 
