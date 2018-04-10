@@ -1,6 +1,7 @@
 /* eslint-env jest */
 import fs from 'fs'
 import path from 'path'
+import onml from 'onml'
 
 import { graph2svg } from '../src/index'
 
@@ -13,7 +14,8 @@ describe('generate SVG', () => {
       height: 100
     }
     const svg = await graph2svg(graph)
-    expect(svg).toBe('<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"></svg>')
+    expect(onml.parse(svg)).toEqual(
+      ['svg', { xmlns: 'http://www.w3.org/2000/svg', width: '100', height: '100' }])
   })
 
   test('one node', async () => {
@@ -32,7 +34,10 @@ describe('generate SVG', () => {
     }
     const svg = await graph2svg(graph)
     fs.writeFileSync(path.join(__dirname, 'output', 'one-node.svg'), svg)
-    expect(svg).toBe('<svg xmlns="http://www.w3.org/2000/svg" width="124" height="124"><rect x="12" y="12" width="100" height="100" stroke="black" fill="white"></rect></svg>')
+    expect(onml.parse(svg)).toEqual(
+      ['svg', { xmlns: 'http://www.w3.org/2000/svg', width: '124', height: '124' },
+        ['rect', { x: '12', y: '12', width: '100', height: '100', stroke: 'black', fill: 'white' }]
+      ])
   })
 
   test('two nodes', async () => {
@@ -56,7 +61,11 @@ describe('generate SVG', () => {
     }
     const svg = await graph2svg(graph)
     fs.writeFileSync(path.join(__dirname, 'output', 'two-nodes.svg'), svg)
-    expect(svg).toBe('<svg xmlns="http://www.w3.org/2000/svg" width="236" height="124"><rect x="12" y="12" width="100" height="100" stroke="black" fill="white"></rect><rect x="124" y="12" width="100" height="100" stroke="black" fill="white"></rect></svg>')
+    expect(onml.parse(svg)).toEqual(
+      ['svg', { xmlns: 'http://www.w3.org/2000/svg', width: '236', height: '124' },
+        ['rect', { x: '12', y: '12', width: '100', height: '100', stroke: 'black', fill: 'white' }],
+        ['rect', { x: '124', y: '12', width: '100', height: '100', stroke: 'black', fill: 'white' }]
+      ])
   })
 
   test('one edge', async () => {
@@ -87,6 +96,11 @@ describe('generate SVG', () => {
     }
     const svg = await graph2svg(graph)
     fs.writeFileSync(path.join(__dirname, 'output', 'one-edge.svg'), svg)
-    expect(svg).toBe('<svg xmlns="http://www.w3.org/2000/svg" width="244" height="124"><rect x="12" y="12" width="100" height="100" stroke="black" fill="white"></rect><rect x="132" y="12" width="100" height="100" stroke="black" fill="white"></rect><line x1="112" y1="62" x2="132" y2="62" stroke="black"></line></svg>')
+    expect(onml.parse(svg)).toEqual(
+      ['svg', { xmlns: 'http://www.w3.org/2000/svg', width: '244', height: '124' },
+        ['rect', { x: '12', y: '12', width: '100', height: '100', stroke: 'black', fill: 'white' }],
+        ['rect', { x: '132', y: '12', width: '100', height: '100', stroke: 'black', fill: 'white' }],
+        ['line', { x1: '112', y1: '62', x2: '132', y2: '62', stroke: 'black' }]
+      ])
   })
 })
