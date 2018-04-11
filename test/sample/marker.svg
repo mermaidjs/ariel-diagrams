@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500">
+  <marker id="arrowhead" markerWidth="4" markerHeight="6" refX="4" refY="3" markerUnits="strokeWidth"  orient="auto">
+    <path d="M 0 0 L 0 6 L 4 3 Z"></path>
+  </marker>
+  <line x1="0" y1="0" x2="100" y2="100" marker-end="url(#arrowhead)" stroke="black" stroke-width="10"></line>
+  <line x1="0" y1="100" x2="100" y2="200" marker-end="url(#arrowhead)" stroke="black" stroke-width="1"></line>
+</svg>
