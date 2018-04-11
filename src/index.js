@@ -13,11 +13,11 @@ export const graph2svg = async (graph) => {
     svg.add(new X('rect', { x: n.x, y: n.y, width: n.width, height: n.height, stroke: 'black', fill: 'white' }))
   }, root.children || [])
   R.forEach(e => {
-    R.forEach(s => {
-      console.log('section')
-      svg.add(new X('line', { x1: s.startPoint.x, y1: s.startPoint.y, x2: s.endPoint.x, y2: s.endPoint.y, stroke: 'black' }))
-    }, e.sections)
+    const d = R.pipe(
+      R.map(s => `M ${s.startPoint.x} ${s.startPoint.y} L ${s.endPoint.x} ${s.endPoint.y}`),
+      R.join(' ')
+    )(e.sections)
+    svg.add(new X('path', { d, stroke: 'black' }))
   }, root.edges || [])
-
   return svg.toString()
 }

@@ -100,7 +100,7 @@ describe('generate SVG', () => {
       ['svg', { xmlns: 'http://www.w3.org/2000/svg', width: '244', height: '124' },
         ['rect', { x: '12', y: '12', width: '100', height: '100', stroke: 'black', fill: 'white' }],
         ['rect', { x: '132', y: '12', width: '100', height: '100', stroke: 'black', fill: 'white' }],
-        ['line', { x1: '112', y1: '62', x2: '132', y2: '62', stroke: 'black' }]
+        ['path', { d: 'M 112 62 L 132 62', stroke: 'black' }]
       ])
   })
 
@@ -141,8 +141,8 @@ describe('generate SVG', () => {
       ['svg', { xmlns: 'http://www.w3.org/2000/svg', width: '244', height: '124' },
         ['rect', { x: '12', y: '12', width: '100', height: '100', stroke: 'black', fill: 'white' }],
         ['rect', { x: '132', y: '12', width: '100', height: '100', stroke: 'black', fill: 'white' }],
-        ['line', { x1: '112', y1: '78.66666666666666', x2: '132', y2: '78.66666666666666', stroke: 'black' }],
-        ['line', { x1: '132', y1: '45.33333333333333', x2: '112', y2: '45.33333333333333', stroke: 'black' }]
+        ['path', { d: 'M 112 78.66666666666666 L 132 78.66666666666666', stroke: 'black' }],
+        ['path', { d: 'M 132 45.33333333333333 L 112 45.33333333333333', stroke: 'black' }]
       ])
   })
 })
