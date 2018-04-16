@@ -237,4 +237,111 @@ describe('generate SVG', () => {
         ['path', { d: 'M 132 45.33333333333333 L 112 45.33333333333333', stroke: 'black', 'marker-end': 'url(#arrow)' }]
       ])
   })
+
+  test('one nested node', async () => {
+    const graph = {
+      id: 'root',
+      layoutOptions: { 'elk.algorithm': 'layered', 'elk.direction': 'RIGHT' },
+      width: 100,
+      height: 100,
+      children: [
+        {
+          id: 'n1',
+          children: [
+            {
+              id: 'n1-1',
+              width: 100,
+              height: 100
+            }
+          ]
+        }
+      ]
+    }
+    const svg = await graph2svg(graph)
+    fs.writeFileSync(path.join(__dirname, 'output', 'one-nested-node.svg'), xmlFormat(svg))
+    expect(onml.parse(svg)).toEqual(
+      ['svg', { xmlns: 'http://www.w3.org/2000/svg', width: '148', height: '148' },
+        ['rect', { x: '12', y: '12', width: '124', height: '124', stroke: 'black', fill: 'white' }],
+        ['svg', { x: '12', y: '12', width: '124', height: '124' },
+          ['rect', { x: '12', y: '12', width: '100', height: '100', stroke: 'black', fill: 'white' }]
+        ]
+      ])
+  })
+
+  // test('one node label', async () => {
+  //   const graph = {
+  //     id: 'root',
+  //     layoutOptions: { 'elk.algorithm': 'layered', 'elk.direction': 'RIGHT' },
+  //     width: 100,
+  //     height: 100,
+  //     children: [
+  //       {
+  //         id: 'n1',
+  //         label: 'n1',
+  //         width: 100,
+  //         height: 100
+  //       }
+  //     ]
+  //   }
+  //   const svg = await graph2svg(graph)
+  //   fs.writeFileSync(path.join(__dirname, 'output', 'one-node-label.svg'), xmlFormat(svg))
+  //   expect(onml.parse(svg)).toEqual(
+  //     ['svg', { xmlns: 'http://www.w3.org/2000/svg', width: '124', height: '124' },
+  //       ['rect', { x: '12', y: '12', width: '100', height: '100', stroke: 'black', fill: 'white' }]
+  //     ])
+  // })
+
+  // test('one nested node', async () => {
+  //   const graph = {
+  //     id: 'root',
+  //     layoutOptions: { 'elk.algorithm': 'layered', 'elk.direction': 'RIGHT' },
+  //     width: 100,
+  //     height: 100,
+  //     children: [
+  //       {
+  //         id: 'n0',
+  //         width: 100,
+  //         height: 100
+  //       },
+  //       {
+  //         id: 'n1',
+  //         layoutOptions: { 'elk.algorithm': 'layered', 'elk.direction': 'DOWN' },
+  //         children: [
+  //           {
+  //             id: 'n1-1',
+  //             width: 60,
+  //             height: 60
+  //           },
+  //           {
+  //             id: 'n1-2',
+  //             width: 60,
+  //             height: 60
+  //           }
+  //         ],
+  //         edges: [
+  //           {
+  //             type: 'DIRECTED',
+  //             id: 'e2',
+  //             sources: [ 'n1-2' ],
+  //             targets: [ 'n1-1' ]
+  //           }
+  //         ]
+  //       }
+  //     ],
+  //     edges: [
+  //       {
+  //         type: 'DIRECTED',
+  //         id: 'e1',
+  //         sources: [ 'n0' ],
+  //         targets: [ 'n1' ]
+  //       }
+  //     ]
+  //   }
+  //   const svg = await graph2svg(graph)
+  //   fs.writeFileSync(path.join(__dirname, 'output', 'one-nested-node.svg'), xmlFormat(svg))
+  //   expect(onml.parse(svg)).toEqual(
+  //     ['svg', { xmlns: 'http://www.w3.org/2000/svg', width: '124', height: '124' },
+  //       ['rect', { x: '12', y: '12', width: '100', height: '100', stroke: 'black', fill: 'white' }]
+  //     ])
+  // })
 })
