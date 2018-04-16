@@ -37,11 +37,20 @@ const createSVG = (nodes, edges) => {
       edge.set('marker-end', 'url(#arrow)')
     }
     svg.append(edge)
+    if (!R.isNil(e.labels) && !R.isEmpty(e.labels)) {
+      R.forEach(l => {
+        svg.append(new X('svg', R.pick(['x', 'y', 'width', 'height'], l), [
+          new X('rect', { x: 0, y: 0, width: l.width, height: l.height, fill: 'gray' }),
+          new X('text', { x: '50%', y: '50%', 'text-anchor': 'middle', 'dominant-baseline': 'central', stroke: 'black' }, l.text)
+        ]))
+      }, e.labels)
+    }
   }, edges)
   return svg
 }
 
 export const graph2svg = async (graph) => {
+  // console.log(await elk.knownLayoutOptions())
   const root = await elk.layout(graph)
   console.log(JSON.stringify(root, null, 2))
   const svg = createSVG(root.children, root.edges)
