@@ -15,7 +15,7 @@ class Element {
     return this
   }
 
-  add (element) {
+  append (element) {
     if (R.isNil(this.elementList)) {
       this.elementList = []
     }
@@ -23,6 +23,17 @@ class Element {
       this.elementList = [this.elementList]
     }
     this.elementList.push(element)
+    return this
+  }
+
+  prepend (element) {
+    if (R.isNil(this.elementList)) {
+      this.elementList = []
+    }
+    if (!Array.isArray(this.elementList)) {
+      this.elementList = [this.elementList]
+    }
+    this.elementList.unshift(element)
     return this
   }
 

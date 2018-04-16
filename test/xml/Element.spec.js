@@ -25,12 +25,21 @@ describe('XML Element', () => {
     expect(element.toString()).toBe('<div class="a" style="color: red;"></div>')
   })
 
-  test('add children', () => {
+  test('append children', () => {
     const element = new Element('div')
     expect(element.toString()).toBe('<div></div>')
-    element.add('hello')
+    element.append('hello')
     expect(element.toString()).toBe('<div>hello</div>')
-    element.add(new Element('p', undefined, 'world'))
+    element.append(new Element('p', undefined, 'world'))
     expect(element.toString()).toBe('<div>hello<p>world</p></div>')
+  })
+
+  test('prepend children', () => {
+    const element = new Element('div')
+    expect(element.toString()).toBe('<div></div>')
+    element.prepend('hello')
+    expect(element.toString()).toBe('<div>hello</div>')
+    element.prepend(new Element('p', undefined, 'world'))
+    expect(element.toString()).toBe('<div><p>world</p>hello</div>')
   })
 })
