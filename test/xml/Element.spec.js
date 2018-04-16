@@ -25,6 +25,13 @@ describe('XML Element', () => {
     expect(element.toString()).toBe('<div class="a" style="color: red;"></div>')
   })
 
+  test('update attributes', () => {
+    const element = new Element('div')
+    expect(element.toString()).toBe('<div></div>')
+    element.update({ class: 'a', style: 'color: red;' })
+    expect(element.toString()).toBe('<div class="a" style="color: red;"></div>')
+  })
+
   test('append children', () => {
     const element = new Element('div')
     expect(element.toString()).toBe('<div></div>')

@@ -7,32 +7,41 @@ class Element {
     this.elementList = elementList
   }
 
-  set (key, value) {
+  _normalizeAttribues () {
     if (R.isNil(this.attributes)) {
       this.attributes = {}
     }
+  }
+
+  set (key, value) {
+    this._normalizeAttribues()
     this.attributes[key] = value
     return this
   }
 
-  append (element) {
+  update (attributes) {
+    this._normalizeAttribues()
+    this.attributes = R.merge(this.attributes, attributes)
+    return this
+  }
+
+  _normalizeElementList () {
     if (R.isNil(this.elementList)) {
       this.elementList = []
     }
     if (!Array.isArray(this.elementList)) {
       this.elementList = [this.elementList]
     }
+  }
+
+  append (element) {
+    this._normalizeElementList()
     this.elementList.push(element)
     return this
   }
 
   prepend (element) {
-    if (R.isNil(this.elementList)) {
-      this.elementList = []
-    }
-    if (!Array.isArray(this.elementList)) {
-      this.elementList = [this.elementList]
-    }
+    this._normalizeElementList()
     this.elementList.unshift(element)
     return this
   }
