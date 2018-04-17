@@ -8,8 +8,8 @@ const elk = new ELK({
   defaultLayoutOptions: {
     'elk.algorithm': 'layered',
     'elk.direction': 'RIGHT',
-    'elk.padding': '[top=12,left=12,bottom=12,right=12]'
-    // 'elk.layered.spacing.nodeNodeBetweenLayers': 12 // this has effect, but only if there are edges.
+    'elk.padding': '[top=12,left=12,bottom=12,right=12]',
+    'elk.layered.spacing.nodeNodeBetweenLayers': 20 // this has effect, but only if there are edges.
   }
 })
 
