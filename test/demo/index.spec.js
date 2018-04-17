@@ -25,20 +25,18 @@ describe('generate SVG', () => {
       id: 'root',
       layoutOptions: {
         'elk.algorithm': 'layered',
-        'elk.direction': 'RIGHT',
-        'elk.nodeLabels.placement': 'INSIDE H_CENTER V_CENTER'
+        'elk.direction': 'RIGHT'
       },
       width: 100,
       height: 100,
       children: [
         {
           id: 'n1',
-          label: { text: 'n1',
+          label: {
+            text: 'n1',
             width: 40,
-            height: 20,
-            layoutOptions: {
-              'elk.nodeLabels.placement': 'INSIDE H_CENTER V_CENTER'
-            } },
+            height: 20
+          },
           width: 100,
           height: 100
         }

@@ -11,8 +11,6 @@ describe('edge arrow', () => {
     const graph = {
       id: 'root',
       layoutOptions: { 'elk.algorithm': 'layered', 'elk.direction': 'RIGHT' },
-      width: 100,
-      height: 100,
       children: [
         {
           id: 'n1',
@@ -53,8 +51,6 @@ describe('edge arrow', () => {
     const graph = {
       id: 'root',
       layoutOptions: { 'elk.algorithm': 'layered', 'elk.direction': 'LEFT' },
-      width: 100,
-      height: 100,
       children: [
         {
           id: 'n1',

@@ -11,8 +11,6 @@ describe('node basic', () => {
     const graph = {
       id: 'root',
       layoutOptions: { 'elk.algorithm': 'layered', 'elk.direction': 'RIGHT' },
-      width: 100,
-      height: 100,
       children: [
         {
           id: 'n1',
@@ -33,8 +31,6 @@ describe('node basic', () => {
     const graph = {
       id: 'root',
       layoutOptions: { 'elk.algorithm': 'layered', 'elk.direction': 'RIGHT' },
-      width: 100,
-      height: 100,
       children: [
         {
           id: 'n1',
