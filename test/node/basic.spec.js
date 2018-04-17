@@ -23,7 +23,9 @@ describe('node basic', () => {
     fs.writeFileSync(path.join(__dirname, 'output', 'one-node.svg'), xmlFormat(svg))
     expect(onml.parse(svg)).toEqual(
       ['svg', { xmlns: 'http://www.w3.org/2000/svg', width: '124', height: '124' },
-        ['rect', { x: '12', y: '12', width: '100', height: '100', stroke: 'black', fill: 'none' }]
+        ['svg', { x: '12', y: '12', width: '100', height: '100' },
+          ['rect', { width: '100', height: '100', stroke: 'black', fill: 'none' }]
+        ]
       ])
   })
 
@@ -48,8 +50,12 @@ describe('node basic', () => {
     fs.writeFileSync(path.join(__dirname, 'output', 'two-nodes.svg'), xmlFormat(svg))
     expect(onml.parse(svg)).toEqual(
       ['svg', { xmlns: 'http://www.w3.org/2000/svg', width: '236', height: '124' },
-        ['rect', { x: '12', y: '12', width: '100', height: '100', stroke: 'black', fill: 'none' }],
-        ['rect', { x: '124', y: '12', width: '100', height: '100', stroke: 'black', fill: 'none' }]
+        ['svg', { x: '12', y: '12', width: '100', height: '100' },
+          ['rect', { width: '100', height: '100', stroke: 'black', fill: 'none' }]
+        ],
+        ['svg', { x: '124', y: '12', width: '100', height: '100' },
+          ['rect', { width: '100', height: '100', stroke: 'black', fill: 'none' }]
+        ]
       ])
   })
 })

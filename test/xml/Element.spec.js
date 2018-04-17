@@ -7,7 +7,7 @@ describe('XML Element', () => {
   })
 
   test('attributes', () => {
-    expect(new Element('rect', { x: 0, y: 1, width: 2, height: 3 }).toString()).toBe('<rect x="0" y="1" width="2" height="3"></rect>')
+    expect(new Element('rect', { x: 1, y: 2, width: 3, height: 4 }).toString()).toBe('<rect x="1" y="2" width="3" height="4"></rect>')
   })
 
   test('children', () => {
@@ -32,6 +32,16 @@ describe('XML Element', () => {
     expect(element.toString()).toBe('<div class="a" style="color: red;"></div>')
   })
 
+  test('delete attributes', () => {
+    const element = new Element('div')
+    element.update({ class: 'a', style: 'color: red;' })
+    expect(element.toString()).toBe('<div class="a" style="color: red;"></div>')
+    element.delete(['class'])
+    expect(element.toString()).toBe('<div style="color: red;"></div>')
+    element.delete('style')
+    expect(element.toString()).toBe('<div></div>')
+  })
+
   test('append children', () => {
     const element = new Element('div')
     expect(element.toString()).toBe('<div></div>')
@@ -48,5 +58,14 @@ describe('XML Element', () => {
     expect(element.toString()).toBe('<div>hello</div>')
     element.prepend(new Element('p', undefined, 'world'))
     expect(element.toString()).toBe('<div><p>world</p>hello</div>')
+  })
+
+  test('shift children', () => {
+    const element = new Element('div')
+    element.prepend('hello')
+    element.prepend(new Element('p', undefined, 'world'))
+    expect(element.toString()).toBe('<div><p>world</p>hello</div>')
+    element.shift()
+    expect(element.toString()).toBe('<div>hello</div>')
   })
 })

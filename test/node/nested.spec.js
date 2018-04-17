@@ -28,9 +28,11 @@ describe('node nested', () => {
     fs.writeFileSync(path.join(__dirname, 'output', 'one-nested-node.svg'), xmlFormat(svg))
     expect(onml.parse(svg)).toEqual(
       ['svg', { xmlns: 'http://www.w3.org/2000/svg', width: '148', height: '148' },
-        ['rect', { x: '12', y: '12', width: '124', height: '124', stroke: 'black', fill: 'none' }],
         ['svg', { x: '12', y: '12', width: '124', height: '124' },
-          ['rect', { x: '12', y: '12', width: '100', height: '100', stroke: 'black', fill: 'none' }]
+          ['rect', { width: '124', height: '124', stroke: 'black', fill: 'none' }],
+          ['svg', { x: '12', y: '12', width: '100', height: '100' },
+            ['rect', { width: '100', height: '100', stroke: 'black', fill: 'none' }]
+          ]
         ]
       ])
   })
@@ -61,10 +63,14 @@ describe('node nested', () => {
     fs.writeFileSync(path.join(__dirname, 'output', 'two-nested-nodes.svg'), xmlFormat(svg))
     expect(onml.parse(svg)).toEqual(
       ['svg', { xmlns: 'http://www.w3.org/2000/svg', width: '260', height: '148' },
-        ['rect', { x: '12', y: '12', width: '236', height: '124', stroke: 'black', fill: 'none' }],
         ['svg', { x: '12', y: '12', width: '236', height: '124' },
-          ['rect', { x: '12', y: '12', width: '100', height: '100', stroke: 'black', fill: 'none' }],
-          ['rect', { x: '124', y: '12', width: '100', height: '100', stroke: 'black', fill: 'none' }]
+          ['rect', { width: '236', height: '124', stroke: 'black', fill: 'none' }],
+          ['svg', { x: '12', y: '12', width: '100', height: '100' },
+            ['rect', { width: '100', height: '100', stroke: 'black', fill: 'none' }]
+          ],
+          ['svg', { x: '124', y: '12', width: '100', height: '100' },
+            ['rect', { width: '100', height: '100', stroke: 'black', fill: 'none' }]
+          ]
         ]
       ])
   })

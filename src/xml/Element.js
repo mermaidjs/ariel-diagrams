@@ -25,6 +25,12 @@ class Element {
     return this
   }
 
+  delete (attributes) {
+    this._normalizeAttribues()
+    this.attributes = R.omit(Array.isArray(attributes) ? attributes : [attributes], this.attributes)
+    return this
+  }
+
   _normalizeElementList () {
     if (R.isNil(this.elementList)) {
       this.elementList = []
@@ -43,6 +49,12 @@ class Element {
   prepend (element) {
     this._normalizeElementList()
     this.elementList.unshift(element)
+    return this
+  }
+
+  shift () {
+    this._normalizeElementList()
+    this.elementList.shift()
     return this
   }
 

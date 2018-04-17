@@ -20,31 +20,7 @@ describe('generate SVG', () => {
       ['svg', { xmlns: 'http://www.w3.org/2000/svg', width: '100', height: '100' }])
   })
 
-  test('one node label', async () => {
-    const graph = {
-      id: 'root',
-      layoutOptions: {
-        'elk.algorithm': 'layered',
-        'elk.direction': 'RIGHT'
-      },
-      children: [
-        {
-          id: 'n1',
-          label: {
-            text: 'n1',
-            width: 40,
-            height: 20
-          },
-          width: 100,
-          height: 100
-        }
-      ]
-    }
-    const svg = await graph2svg(graph)
-    fs.writeFileSync(path.join(__dirname, 'output', 'one-node-label.svg'), xmlFormat(svg))
-  })
-
-  test('nested nodes', async () => {
+  test('complex', async () => {
     const graph = {
       id: 'root',
       layoutOptions: { 'elk.direction': 'RIGHT' },
@@ -69,8 +45,8 @@ describe('generate SVG', () => {
               height: 60,
               labels: [{
                 text: 'hello',
-                width: 180,
-                height: 20
+                width: 60,
+                height: 60
               }]
             }
           ],
@@ -94,6 +70,6 @@ describe('generate SVG', () => {
       ]
     }
     const svg = await graph2svg(graph)
-    fs.writeFileSync(path.join(__dirname, 'output', 'nested-nodes.svg'), xmlFormat(svg))
+    fs.writeFileSync(path.join(__dirname, 'output', 'complex.svg'), xmlFormat(svg))
   })
 })
