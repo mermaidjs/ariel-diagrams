@@ -13,13 +13,13 @@ const createSVG = (nodes, edges) => {
 
   R.forEach(n => {
     // node
-    const node = new X('rect', { x: n.x, y: n.y, width: n.width, height: n.height, stroke: 'black', fill: 'none' })
+    const node = new X('rect', R.merge(R.pick(['x', 'y', 'width', 'height'], n), { stroke: 'black', fill: 'none' }))
     svg.append(node)
 
     // sub nodes
     if (!R.isNil(n.children) && !R.isEmpty(n.children)) {
       const innerSVG = createSVG(n.children, n.edges)
-      innerSVG.update({ x: n.x, y: n.y, width: n.width, height: n.height })
+      innerSVG.update(R.pick(['x', 'y', 'width', 'height'], n))
       svg.append(innerSVG)
     }
   }, nodes)
