@@ -48,8 +48,8 @@ describe('edge label', () => {
             ['path', { d: 'M 0 0 L 0 6 L 8 3 Z' }]
           ]
         ],
-        ['rect', { x: '12', y: '12', width: '100', height: '100', stroke: 'black', fill: 'white' }],
-        ['rect', { x: '232', y: '12', width: '100', height: '100', stroke: 'black', fill: 'white' }],
+        ['rect', { x: '12', y: '12', width: '100', height: '100', stroke: 'black', fill: 'none' }],
+        ['rect', { x: '232', y: '12', width: '100', height: '100', stroke: 'black', fill: 'none' }],
         ['path', { d: 'M 112 62 L 232 62', stroke: 'black', 'marker-end': 'url(#arrow)' }],
         ['svg', { x: '132', y: '65', width: '80', height: '20' },
           ['rect', { x: '0', y: '0', width: '80', height: '20', fill: 'gray' }],
@@ -102,8 +102,8 @@ describe('edge label', () => {
             ['path', { d: 'M 0 0 L 0 6 L 8 3 Z' }]
           ]
         ],
-        ['rect', { x: '12', y: '12', width: '100', height: '100', stroke: 'black', fill: 'white' }],
-        ['rect', { x: '232', y: '12', width: '100', height: '100', stroke: 'black', fill: 'white' }],
+        ['rect', { x: '12', y: '12', width: '100', height: '100', stroke: 'black', fill: 'none' }],
+        ['rect', { x: '232', y: '12', width: '100', height: '100', stroke: 'black', fill: 'none' }],
         ['path', { d: 'M 112 62 L 232 62', stroke: 'black', 'marker-end': 'url(#arrow)' }],
         ['svg', { x: '132', y: '51.5', width: '80', height: '20' },
           ['rect', { x: '0', y: '0', width: '80', height: '20', fill: 'gray' }],

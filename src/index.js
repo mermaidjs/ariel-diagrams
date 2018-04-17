@@ -11,7 +11,7 @@ const createSVG = (nodes, edges) => {
     return svg
   }
   R.forEach(n => {
-    const node = new X('rect', { x: n.x, y: n.y, width: n.width, height: n.height, stroke: 'black', fill: 'white' })
+    const node = new X('rect', { x: n.x, y: n.y, width: n.width, height: n.height, stroke: 'black', fill: 'none' })
     svg.append(node)
     if (!R.isNil(n.children) && !R.isEmpty(n.children)) {
       const innerSVG = createSVG(n.children, n.edges)
