@@ -10,7 +10,6 @@ describe('node basic', () => {
   test('one node', async () => {
     const graph = {
       id: 'root',
-      layoutOptions: { 'elk.algorithm': 'layered', 'elk.direction': 'RIGHT' },
       children: [
         {
           id: 'n1',
@@ -32,7 +31,6 @@ describe('node basic', () => {
   test('two nodes', async () => {
     const graph = {
       id: 'root',
-      layoutOptions: { 'elk.algorithm': 'layered', 'elk.direction': 'RIGHT' },
       children: [
         {
           id: 'n1',

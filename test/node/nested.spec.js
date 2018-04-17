@@ -10,7 +10,6 @@ describe('node nested', () => {
   test('one nested node', async () => {
     const graph = {
       id: 'root',
-      layoutOptions: { 'elk.algorithm': 'layered', 'elk.direction': 'RIGHT' },
       children: [
         {
           id: 'n1',
@@ -40,7 +39,6 @@ describe('node nested', () => {
   test('two nested nodes', async () => {
     const graph = {
       id: 'root',
-      layoutOptions: { 'elk.algorithm': 'layered', 'elk.direction': 'RIGHT' },
       children: [
         {
           id: 'n1',

@@ -4,7 +4,13 @@ import * as R from 'ramda'
 import X from './xml/Element'
 import { hasDirectedEdge } from './utils'
 
-const elk = new ELK()
+const elk = new ELK({
+  defaultLayoutOptions: {
+    'elk.algorithm': 'layered',
+    'elk.direction': 'RIGHT',
+    'elk.padding': '[top=12,left=12,bottom=12,right=12]'
+  }
+})
 
 const createNode = n => {
   // node

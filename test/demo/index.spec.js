@@ -10,7 +10,6 @@ describe('generate SVG', () => {
   test('hello world', async () => {
     const graph = {
       id: 'root',
-      layoutOptions: { 'elk.algorithm': 'layered', 'elk.direction': 'RIGHT' },
       width: 100,
       height: 100
     }
@@ -23,7 +22,6 @@ describe('generate SVG', () => {
   test('complex', async () => {
     const graph = {
       id: 'root',
-      layoutOptions: { 'elk.direction': 'RIGHT' },
       children: [
         {
           id: 'n0',

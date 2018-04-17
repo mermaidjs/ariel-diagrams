@@ -10,7 +10,6 @@ describe('edge label', () => {
   test('one edge label', async () => {
     const graph = {
       id: 'root',
-      layoutOptions: { 'elk.algorithm': 'layered', 'elk.direction': 'RIGHT' },
       children: [
         {
           id: 'n1',
@@ -63,7 +62,6 @@ describe('edge label', () => {
   test('inline edge label', async () => {
     const graph = {
       id: 'root',
-      layoutOptions: { 'elk.algorithm': 'layered', 'elk.direction': 'RIGHT' },
       children: [
         {
           id: 'n1',

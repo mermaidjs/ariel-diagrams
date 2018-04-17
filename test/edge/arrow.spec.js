@@ -10,7 +10,6 @@ describe('edge arrow', () => {
   test('one arrow', async () => {
     const graph = {
       id: 'root',
-      layoutOptions: { 'elk.algorithm': 'layered', 'elk.direction': 'RIGHT' },
       children: [
         {
           id: 'n1',
@@ -54,7 +53,6 @@ describe('edge arrow', () => {
   test('two arrows', async () => {
     const graph = {
       id: 'root',
-      layoutOptions: { 'elk.algorithm': 'layered', 'elk.direction': 'LEFT' },
       children: [
         {
           id: 'n1',
@@ -91,14 +89,14 @@ describe('edge arrow', () => {
             ['path', { d: 'M 0 0 L 0 6 L 8 3 Z' }]
           ]
         ],
-        ['svg', { x: '12', y: '12', width: '100', height: '100' },
-          ['rect', { width: '100', height: '100', stroke: 'black', fill: 'none' }]
-        ],
         ['svg', { x: '132', y: '12', width: '100', height: '100' },
           ['rect', { width: '100', height: '100', stroke: 'black', fill: 'none' }]
         ],
-        ['path', { d: 'M 112 78.66666666666666 L 132 78.66666666666666', stroke: 'black', 'marker-end': 'url(#arrow)' }],
-        ['path', { d: 'M 132 45.33333333333333 L 112 45.33333333333333', stroke: 'black', 'marker-end': 'url(#arrow)' }]
+        ['svg', { x: '12', y: '12', width: '100', height: '100' },
+          ['rect', { width: '100', height: '100', stroke: 'black', fill: 'none' }]
+        ],
+        ['path', { d: 'M 132 78.66666666666666 L 112 78.66666666666666', stroke: 'black', 'marker-end': 'url(#arrow)' }],
+        ['path', { d: 'M 112 45.33333333333333 L 132 45.33333333333333', stroke: 'black', 'marker-end': 'url(#arrow)' }]
       ])
   })
 })
