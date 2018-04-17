@@ -304,16 +304,76 @@ describe('generate SVG', () => {
       ])
   })
 
+  test('one edge label', async () => {
+    const graph = {
+      id: 'root',
+      layoutOptions: { 'elk.algorithm': 'layered', 'elk.direction': 'RIGHT' },
+      width: 100,
+      height: 100,
+      children: [
+        {
+          id: 'n1',
+          width: 100,
+          height: 100
+        },
+        {
+          id: 'n2',
+          width: 100,
+          height: 100
+        }
+      ],
+      edges: [
+        {
+          type: 'DIRECTED',
+          id: 'e1',
+          sources: [ 'n1' ],
+          targets: [ 'n2' ],
+          labels: [{
+            text: 'hello world',
+            width: 80,
+            height: 20
+          }]
+        }
+      ]
+    }
+    const svg = await graph2svg(graph)
+    fs.writeFileSync(path.join(__dirname, 'output', 'one-edge-label.svg'), xmlFormat(svg))
+    expect(onml.parse(svg)).toEqual(
+      ['svg', { xmlns: 'http://www.w3.org/2000/svg', width: '344', height: '124' },
+        ['defs', {},
+          ['marker', { id: 'arrow', markerWidth: '8', markerHeight: '6', refX: '8', refY: '3', markerUnits: 'strokeWidth', orient: 'auto' },
+            ['path', { d: 'M 0 0 L 0 6 L 8 3 Z' }]
+          ]
+        ],
+        ['rect', { x: '12', y: '12', width: '100', height: '100', stroke: 'black', fill: 'white' }],
+        ['rect', { x: '232', y: '12', width: '100', height: '100', stroke: 'black', fill: 'white' }],
+        ['path', { d: 'M 112 62 L 232 62', stroke: 'black', 'marker-end': 'url(#arrow)' }],
+        ['svg', { x: '132', y: '65', width: '80', height: '20' },
+          ['rect', { x: '0', y: '0', width: '80', height: '20', fill: 'gray' }],
+          ['text', { x: '50%', y: '50%', 'text-anchor': 'middle', 'dominant-baseline': 'central', 'stroke': 'black' }, 'hello world']
+        ]
+      ])
+  })
+
   // test('one node label', async () => {
   //   const graph = {
   //     id: 'root',
-  //     layoutOptions: { 'elk.algorithm': 'layered', 'elk.direction': 'RIGHT' },
+  //     layoutOptions: {
+  //       'elk.algorithm': 'layered',
+  //       'elk.direction': 'RIGHT',
+  //       'elk.nodeLabels.placement': 'INSIDE H_CENTER V_CENTER'
+  //     },
   //     width: 100,
   //     height: 100,
   //     children: [
   //       {
   //         id: 'n1',
-  //         label: 'n1',
+  //         label: { text: 'n1',
+  //           width: 40,
+  //           height: 20,
+  //           layoutOptions: {
+  //             'elk.nodeLabels.placement': 'INSIDE H_CENTER V_CENTER'
+  //           } },
   //         width: 100,
   //         height: 100
   //       }
