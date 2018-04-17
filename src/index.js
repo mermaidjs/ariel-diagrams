@@ -8,7 +8,7 @@ const elk = new ELK({
   defaultLayoutOptions: {
     'elk.algorithm': 'layered',
     'elk.direction': 'RIGHT',
-    'elk.padding': '[top=12,left=12,bottom=12,right=12]'
+    'elk.padding': '[top=25,left=25,bottom=25,right=25]'
   }
 })
 
@@ -20,9 +20,13 @@ const createNode = n => {
   // node label
   if (!R.isNil(n.labels) && !R.isEmpty(n.labels)) {
     R.forEach(l => {
-      node.append(
-        new X('text', { x: '50%', y: '50%', 'text-anchor': 'middle', 'dominant-baseline': 'central', stroke: 'black' }, l.text)
-      )
+      let text = new X('text', { x: '50%', y: '50%', 'text-anchor': 'middle', 'dominant-baseline': 'central', stroke: 'black' }, l.text)
+      if (!R.isNil(n.children) && !R.isEmpty(n.children)) { // has children, put label on top
+        const padding = R.path(['layoutOptions', 'elk.padding'], node) || R.path(['defaultLayoutOptions', 'elk.padding'], elk)
+        const paddingTop = padding.split(/top=/)[1].split(',')[0]
+        text = new X('svg', { width: node.width, height: paddingTop }, text)
+      }
+      node.append(text)
     }, n.labels) // todo: do not support multiple labels
   }
 
@@ -64,7 +68,7 @@ const createNode = n => {
 
 export const graph2svg = async (graph) => {
   const root = await elk.layout(graph)
-  console.log(JSON.stringify(root, null, 2))
+  // console.log(JSON.stringify(root, null, 2))
   const rootNode = createNode(root)
   rootNode.delete(['x', 'y'])
   rootNode.update({ xmlns: 'http://www.w3.org/2000/svg' })
