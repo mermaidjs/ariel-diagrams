@@ -10,24 +10,33 @@ const createSVG = (nodes, edges) => {
   if (R.isNil(nodes) || R.isEmpty(nodes)) {
     return svg
   }
+
   R.forEach(n => {
+    // node
     const node = new X('rect', { x: n.x, y: n.y, width: n.width, height: n.height, stroke: 'black', fill: 'none' })
     svg.append(node)
+
+    // sub nodes
     if (!R.isNil(n.children) && !R.isEmpty(n.children)) {
       const innerSVG = createSVG(n.children, n.edges)
       innerSVG.update({ x: n.x, y: n.y, width: n.width, height: n.height })
       svg.append(innerSVG)
     }
   }, nodes)
+
   if (R.isNil(edges) || R.isEmpty(edges)) {
     return svg
   }
+
+  // arrow marker def
   if (R.any(e => e.type === 'DIRECTED', edges)) {
     svg.prepend(new X('defs', null,
       new X('marker', { id: 'arrow', markerWidth: '8', markerHeight: '6', refX: '8', refY: '3', markerUnits: 'strokeWidth', orient: 'auto' },
         new X('path', { d: 'M 0 0 L 0 6 L 8 3 Z' }))))
   }
+
   R.forEach(e => {
+    // edge
     const d = R.pipe(
       R.map(s => `M ${s.startPoint.x} ${s.startPoint.y} L ${s.endPoint.x} ${s.endPoint.y}`),
       R.join(' ')
@@ -37,6 +46,8 @@ const createSVG = (nodes, edges) => {
       edge.set('marker-end', 'url(#arrow)')
     }
     svg.append(edge)
+
+    // edge label
     if (!R.isNil(e.labels) && !R.isEmpty(e.labels)) {
       R.forEach(l => {
         svg.append(new X('svg', R.pick(['x', 'y', 'width', 'height'], l), [

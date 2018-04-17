@@ -27,8 +27,6 @@ describe('generate SVG', () => {
         'elk.algorithm': 'layered',
         'elk.direction': 'RIGHT'
       },
-      width: 100,
-      height: 100,
       children: [
         {
           id: 'n1',
@@ -46,12 +44,10 @@ describe('generate SVG', () => {
     fs.writeFileSync(path.join(__dirname, 'output', 'one-node-label.svg'), xmlFormat(svg))
   })
 
-  test('one nested node', async () => {
+  test('nested nodes', async () => {
     const graph = {
       id: 'root',
-      layoutOptions: { 'elk.algorithm': 'layered', 'elk.direction': 'RIGHT' },
-      width: 100,
-      height: 100,
+      layoutOptions: { 'elk.direction': 'RIGHT' },
       children: [
         {
           id: 'n0',
@@ -60,7 +56,7 @@ describe('generate SVG', () => {
         },
         {
           id: 'n1',
-          layoutOptions: { 'elk.algorithm': 'layered', 'elk.direction': 'DOWN' },
+          layoutOptions: { 'elk.direction': 'DOWN' },
           children: [
             {
               id: 'n1-1',
@@ -70,7 +66,12 @@ describe('generate SVG', () => {
             {
               id: 'n1-2',
               width: 60,
-              height: 60
+              height: 60,
+              labels: [{
+                text: 'hello',
+                width: 180,
+                height: 20
+              }]
             }
           ],
           edges: [
@@ -93,6 +94,6 @@ describe('generate SVG', () => {
       ]
     }
     const svg = await graph2svg(graph)
-    fs.writeFileSync(path.join(__dirname, 'output', 'one-nested-node.svg'), xmlFormat(svg))
+    fs.writeFileSync(path.join(__dirname, 'output', 'nested-nodes.svg'), xmlFormat(svg))
   })
 })
