@@ -37,16 +37,17 @@ describe('generate SVG', () => {
             {
               id: 'n1-1',
               width: 60,
-              height: 60
+              height: 60,
+              labels: [{
+                text: 'world'
+              }]
             },
             {
               id: 'n1-2',
               width: 60,
               height: 60,
               labels: [{
-                text: 'hello',
-                width: 60,
-                height: 60
+                text: 'hello'
               }]
             }
           ],
