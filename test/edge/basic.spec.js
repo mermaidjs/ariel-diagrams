@@ -33,14 +33,14 @@ describe('edge basic', () => {
     const svg = await graph2svg(graph)
     fs.writeFileSync(path.join(__dirname, 'output', 'one-edge.svg'), xmlFormat(svg))
     expect(onml.parse(svg)).toEqual(
-      ['svg', { xmlns: 'http://www.w3.org/2000/svg', width: '244', height: '124' },
-        ['svg', { x: '12', y: '12', width: '100', height: '100' },
-          ['rect', { width: '100', height: '100', stroke: 'black', fill: 'none' }]
+      ['svg', { xmlns: 'http://www.w3.org/2000/svg', width: '275', height: '150' },
+        ['svg', { x: '25', y: '25', width: '100', height: '100' },
+          ['rect', { x: '1', y: '1', width: '98', height: '98', stroke: 'black', fill: 'none' }]
         ],
-        ['svg', { x: '132', y: '12', width: '100', height: '100' },
-          ['rect', { width: '100', height: '100', stroke: 'black', fill: 'none' }]
+        ['svg', { x: '150', y: '25', width: '100', height: '100' },
+          ['rect', { x: '1', y: '1', width: '98', height: '98', stroke: 'black', fill: 'none' }]
         ],
-        ['path', { d: 'M 112 62 L 132 62', stroke: 'black' }]
+        ['path', { d: 'M 125 75 L 150 75', stroke: 'black' }]
       ])
   })
 
@@ -75,15 +75,15 @@ describe('edge basic', () => {
     const svg = await graph2svg(graph)
     fs.writeFileSync(path.join(__dirname, 'output', 'two-edges.svg'), xmlFormat(svg))
     expect(onml.parse(svg)).toEqual(
-      ['svg', { xmlns: 'http://www.w3.org/2000/svg', width: '244', height: '124' },
-        ['svg', { x: '132', y: '12', width: '100', height: '100' },
-          ['rect', { width: '100', height: '100', stroke: 'black', fill: 'none' }]
+      ['svg', { xmlns: 'http://www.w3.org/2000/svg', width: '275', height: '150' },
+        ['svg', { x: '150', y: '25', width: '100', height: '100' },
+          ['rect', { x: '1', y: '1', width: '98', height: '98', stroke: 'black', fill: 'none' }]
         ],
-        ['svg', { x: '12', y: '12', width: '100', height: '100' },
-          ['rect', { width: '100', height: '100', stroke: 'black', fill: 'none' }]
+        ['svg', { x: '25', y: '25', width: '100', height: '100' },
+          ['rect', { x: '1', y: '1', width: '98', height: '98', stroke: 'black', fill: 'none' }]
         ],
-        ['path', { d: 'M 132 78.66666666666666 L 112 78.66666666666666', stroke: 'black' }],
-        ['path', { d: 'M 112 45.33333333333333 L 132 45.33333333333333', stroke: 'black' }]
+        ['path', { d: 'M 150 91.66666666666666 L 125 91.66666666666666', stroke: 'black' }],
+        ['path', { d: 'M 125 58.33333333333333 L 150 58.33333333333333', stroke: 'black' }]
       ])
   })
 })

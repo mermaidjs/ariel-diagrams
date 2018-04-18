@@ -19,6 +19,11 @@ class Element {
     return this
   }
 
+  get (key) {
+    this._normalizeAttribues()
+    return this.attributes[key]
+  }
+
   update (attributes) {
     this._normalizeAttribues()
     this.attributes = R.merge(this.attributes, attributes)

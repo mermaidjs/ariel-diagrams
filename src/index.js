@@ -19,7 +19,11 @@ const createNode = n => {
   const node = new X('svg', R.pick(['x', 'y', 'width', 'height'], n))
   const strokeWidth = 1
   const padding = Math.ceil(strokeWidth / 2) // padding to avoid cliping: https://stackoverflow.com/questions/7241393
-  node.append(new X('rect', { x: padding, y: padding, width: n.width - padding * 2, height: n.height - padding * 2, fill: 'none', stroke: 'black', 'stroke-width': strokeWidth }))
+  const shape = new X('rect', { x: padding, y: padding, width: n.width - padding * 2, height: n.height - padding * 2, fill: 'none', stroke: 'black', 'stroke-width': strokeWidth })
+  if (shape.get('stroke-width') === 1) {
+    shape.delete('stroke-width') // omit default value
+  }
+  node.append(shape)
 
   // node label
   if (!R.isNil(n.labels) && !R.isEmpty(n.labels)) {
@@ -28,7 +32,7 @@ const createNode = n => {
       if (!R.isNil(n.children) && !R.isEmpty(n.children)) { // has children, put label on top
         const padding = R.path(['layoutOptions', 'elk.padding'], node) || R.path(['defaultLayoutOptions', 'elk.padding'], elk)
         const paddingTop = padding.split(/top=/)[1].split(',')[0]
-        text = new X('svg', { width: node.width, height: paddingTop }, text)
+        text = new X('svg', { width: n.width, height: paddingTop }, text)
       }
       node.append(text)
     }, n.labels) // todo: do not support multiple labels

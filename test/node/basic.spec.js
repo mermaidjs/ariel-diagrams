@@ -21,9 +21,9 @@ describe('node basic', () => {
     const svg = await graph2svg(graph)
     fs.writeFileSync(path.join(__dirname, 'output', 'one-node.svg'), xmlFormat(svg))
     expect(onml.parse(svg)).toEqual(
-      ['svg', { xmlns: 'http://www.w3.org/2000/svg', width: '124', height: '124' },
-        ['svg', { x: '12', y: '12', width: '100', height: '100' },
-          ['rect', { width: '100', height: '100', stroke: 'black', fill: 'none' }]
+      ['svg', { xmlns: 'http://www.w3.org/2000/svg', width: '150', height: '150' },
+        ['svg', { x: '25', y: '25', width: '100', height: '100' },
+          ['rect', { x: '1', y: '1', width: '98', height: '98', stroke: 'black', fill: 'none' }]
         ]
       ])
   })
@@ -47,12 +47,12 @@ describe('node basic', () => {
     const svg = await graph2svg(graph)
     fs.writeFileSync(path.join(__dirname, 'output', 'two-nodes.svg'), xmlFormat(svg))
     expect(onml.parse(svg)).toEqual(
-      ['svg', { xmlns: 'http://www.w3.org/2000/svg', width: '236', height: '124' },
-        ['svg', { x: '12', y: '12', width: '100', height: '100' },
-          ['rect', { width: '100', height: '100', stroke: 'black', fill: 'none' }]
+      ['svg', { xmlns: 'http://www.w3.org/2000/svg', width: '275', height: '150' },
+        ['svg', { x: '25', y: '25', width: '100', height: '100' },
+          ['rect', { x: '1', y: '1', width: '98', height: '98', stroke: 'black', fill: 'none' }]
         ],
-        ['svg', { x: '124', y: '12', width: '100', height: '100' },
-          ['rect', { width: '100', height: '100', stroke: 'black', fill: 'none' }]
+        ['svg', { x: '150', y: '25', width: '100', height: '100' },
+          ['rect', { x: '1', y: '1', width: '98', height: '98', stroke: 'black', fill: 'none' }]
         ]
       ])
   })
