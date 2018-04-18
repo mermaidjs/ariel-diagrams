@@ -17,7 +17,9 @@ const elk = new ELK({
 const createNode = n => {
   // node
   const node = new X('svg', R.pick(['x', 'y', 'width', 'height'], n))
-  node.append(new X('rect', R.merge(R.pick(['width', 'height'], n), { fill: 'none', stroke: 'black' })))
+  const strokeWidth = 1
+  const padding = Math.ceil(strokeWidth / 2) // padding to avoid cliping: https://stackoverflow.com/questions/7241393
+  node.append(new X('rect', { x: padding, y: padding, width: n.width - padding * 2, height: n.height - padding * 2, fill: 'none', stroke: 'black', 'stroke-width': strokeWidth }))
 
   // node label
   if (!R.isNil(n.labels) && !R.isEmpty(n.labels)) {
