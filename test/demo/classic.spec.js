@@ -9,7 +9,11 @@ describe('generate SVG', () => {
   test('hello world', async () => {
     const graph = {
       id: 'root',
-      layoutOptions: { 'elk.direction': 'DOWN' },
+      layoutOptions: {
+        'elk.direction': 'DOWN',
+        'elk.layered.crossingMinimization.semiInteractive': true,
+        'elk.layered.crossingMinimization.strategy': 'INTERACTIVE'
+      },
       children: [
         {
           id: 'n1',
@@ -33,19 +37,22 @@ describe('generate SVG', () => {
           id: 'n4',
           width: 100,
           height: 50,
-          labels: [{ text: 'Laptop' }]
+          labels: [{ text: 'Laptop' }],
+          layoutOptions: { 'elk.position': '[x=0,y=0]' }
         },
         {
           id: 'n5',
           width: 100,
           height: 50,
-          labels: [{ text: 'iPhone' }]
+          labels: [{ text: 'iPhone' }],
+          layoutOptions: { 'elk.position': '[x=1,y=0]' }
         },
         {
           id: 'n6',
           width: 100,
           height: 50,
-          labels: [{ text: 'Car' }]
+          labels: [{ text: 'Car' }],
+          layoutOptions: { 'elk.position': '[x=2,y=0]' }
         }
       ],
       edges: [
