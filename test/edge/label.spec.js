@@ -7,7 +7,7 @@ import xmlFormat from 'xml-formatter'
 import { graph2svg } from '../../src/index'
 
 describe('edge label', () => {
-  test('one edge label', async () => {
+  test('non-inline edge label', async () => {
     const graph = {
       id: 'root',
       children: [
@@ -31,13 +31,16 @@ describe('edge label', () => {
           labels: [{
             text: 'hello world',
             width: 80,
-            height: 20
+            height: 20,
+            layoutOptions: {
+              'elk.edgeLabels.inline': false
+            }
           }]
         }
       ]
     }
     const svg = await graph2svg(graph)
-    fs.writeFileSync(path.join(__dirname, 'output', 'one-edge-label.svg'), xmlFormat(svg))
+    fs.writeFileSync(path.join(__dirname, 'output', 'non-inline-edge-label.svg'), xmlFormat(svg))
     expect(onml.parse(svg)).toEqual(
       ['svg', { xmlns: 'http://www.w3.org/2000/svg', width: '380', height: '150' },
         ['defs', {},
@@ -83,10 +86,7 @@ describe('edge label', () => {
           labels: [{
             text: 'hello world',
             width: 80,
-            height: 20,
-            layoutOptions: {
-              inline: true
-            }
+            height: 20
           }]
         }
       ]

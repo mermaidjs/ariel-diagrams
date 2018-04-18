@@ -10,7 +10,8 @@ const elk = new ELK({
     'elk.direction': 'RIGHT',
     'elk.padding': '[top=25,left=25,bottom=25,right=25]',
     'elk.spacing.componentComponent': 25, // unconnected nodes are individual subgraphs, referred to as named components
-    'elk.layered.spacing.nodeNodeBetweenLayers': 25 // this has effect, but only if there are edges.
+    'elk.layered.spacing.nodeNodeBetweenLayers': 25, // this has effect, but only if there are edges.
+    'elk.edgeLabels.inline': true
   }
 })
 
@@ -49,18 +50,23 @@ const createNode = n => {
   // edges
   if (!R.isNil(n.edges) && !R.isEmpty(n.edges)) {
     R.forEach(e => {
+      let polyline = false
       const d = R.pipe(
         R.map(s => {
           let path = `M ${s.startPoint.x} ${s.startPoint.y}`
           R.forEach(p => {
             path += ` L ${p.x} ${p.y}`
+            polyline = true
           }, s.bendPoints || [])
           path += ` L ${s.endPoint.x} ${s.endPoint.y}`
           return path
         }),
         R.join(' ')
       )(e.sections)
-      const edge = new X('path', { d, stroke: 'black', fill: 'none' })
+      const edge = new X('path', { d, stroke: 'black' })
+      if (polyline) {
+        edge.set('fill', 'none')
+      }
       if (e.type === 'DIRECTED') {
         edge.set('marker-end', 'url(#arrow)')
       }

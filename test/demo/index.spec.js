@@ -54,7 +54,12 @@ describe('generate SVG', () => {
               type: 'DIRECTED',
               id: 'e2',
               sources: [ 'n1-2' ],
-              targets: [ 'n1-1' ]
+              targets: [ 'n1-1' ],
+              labels: [{
+                text: 'hello world',
+                width: 100,
+                height: 20
+              }]
             }
           ]
         }
@@ -64,7 +69,12 @@ describe('generate SVG', () => {
           type: 'DIRECTED',
           id: 'e1',
           sources: [ 'n0' ],
-          targets: [ 'n1' ]
+          targets: [ 'n1' ],
+          labels: [{
+            text: 'hello world',
+            width: 100,
+            height: 20
+          }]
         },
         {
           type: 'DIRECTED',
@@ -76,10 +86,7 @@ describe('generate SVG', () => {
           type: 'DIRECTED',
           id: 'e3',
           sources: [ 'n1' ],
-          targets: [ 'n1' ],
-          labels: [{
-            text: 'self introduction'
-          }]
+          targets: [ 'n1' ]
         }
       ]
     }
