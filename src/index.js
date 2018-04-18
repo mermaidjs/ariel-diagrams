@@ -50,10 +50,17 @@ const createNode = n => {
   if (!R.isNil(n.edges) && !R.isEmpty(n.edges)) {
     R.forEach(e => {
       const d = R.pipe(
-        R.map(s => `M ${s.startPoint.x} ${s.startPoint.y} L ${s.endPoint.x} ${s.endPoint.y}`),
+        R.map(s => {
+          let path = `M ${s.startPoint.x} ${s.startPoint.y}`
+          R.forEach(p => {
+            path += ` L ${p.x} ${p.y}`
+          }, s.bendPoints || [])
+          path += ` L ${s.endPoint.x} ${s.endPoint.y}`
+          return path
+        }),
         R.join(' ')
       )(e.sections)
-      const edge = new X('path', { d, stroke: 'black' })
+      const edge = new X('path', { d, stroke: 'black', fill: 'none' })
       if (e.type === 'DIRECTED') {
         edge.set('marker-end', 'url(#arrow)')
       }
@@ -76,7 +83,7 @@ const createNode = n => {
 
 export const graph2svg = async (graph) => {
   const root = await elk.layout(graph)
-  // console.log(JSON.stringify(root, null, 2))
+  console.log(JSON.stringify(root, null, 2))
   const rootNode = createNode(root)
   rootNode.delete(['x', 'y'])
   rootNode.update({ xmlns: 'http://www.w3.org/2000/svg' })

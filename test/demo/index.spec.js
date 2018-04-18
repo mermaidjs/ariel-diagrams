@@ -65,6 +65,21 @@ describe('generate SVG', () => {
           id: 'e1',
           sources: [ 'n0' ],
           targets: [ 'n1' ]
+        },
+        {
+          type: 'DIRECTED',
+          id: 'e2',
+          sources: [ 'n0' ],
+          targets: [ 'n0' ]
+        },
+        {
+          type: 'DIRECTED',
+          id: 'e3',
+          sources: [ 'n1' ],
+          targets: [ 'n1' ],
+          labels: [{
+            text: 'self introduction'
+          }]
         }
       ]
     }
