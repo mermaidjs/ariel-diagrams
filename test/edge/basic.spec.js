@@ -40,7 +40,7 @@ describe('edge basic', () => {
         ['svg', { x: '150', y: '25', width: '100', height: '100' },
           ['rect', { x: '1', y: '1', width: '98', height: '98', stroke: 'black', fill: 'none' }]
         ],
-        ['path', { d: 'M 125 75 L 150 75', stroke: 'black' }]
+        ['path', { d: 'M 125 75 L 125 75 L 137.5 75 L 150 75', stroke: 'black', fill: 'none' }]
       ])
   })
 
@@ -82,8 +82,8 @@ describe('edge basic', () => {
         ['svg', { x: '25', y: '25', width: '100', height: '100' },
           ['rect', { x: '1', y: '1', width: '98', height: '98', stroke: 'black', fill: 'none' }]
         ],
-        ['path', { d: 'M 150 91.66666666666666 L 125 91.66666666666666', stroke: 'black' }],
-        ['path', { d: 'M 125 58.33333333333333 L 150 58.33333333333333', stroke: 'black' }]
+        ['path', { d: 'M 150 91.66666666666666 L 137.5 91.66666666666666 L 125 91.66666666666666 L 125 91.66666666666666', stroke: 'black', fill: 'none' }],
+        ['path', { d: 'M 125 58.33333333333333 L 125 58.33333333333333 L 137.5 58.33333333333333 L 150 58.33333333333333', stroke: 'black', fill: 'none' }]
       ])
   })
 })

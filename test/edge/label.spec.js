@@ -54,7 +54,7 @@ describe('edge label', () => {
         ['svg', { x: '255', y: '25', width: '100', height: '100' },
           ['rect', { x: '1', y: '1', width: '98', height: '98', stroke: 'black', fill: 'none' }]
         ],
-        ['path', { d: 'M 125 75 L 255 75', stroke: 'black', 'marker-end': 'url(#arrow)' }],
+        ['path', { d: 'M 125 75 L 137.5 75 L 163.75 75 L 190 75 L 216.25 75 L 242.5 75 L 255 75', stroke: 'black', 'marker-end': 'url(#arrow)', fill: 'none' }],
         ['svg', { x: '150', y: '78', width: '80', height: '20' },
           ['rect', { width: '80', height: '20', fill: 'gray' }],
           ['text', { x: '50%', y: '50%', 'text-anchor': 'middle', 'dominant-baseline': 'central', 'stroke': 'black' }, 'hello world']
@@ -106,7 +106,7 @@ describe('edge label', () => {
         ['svg', { x: '255', y: '25', width: '100', height: '100' },
           ['rect', { x: '1', y: '1', width: '98', height: '98', stroke: 'black', fill: 'none' }]
         ],
-        ['path', { d: 'M 125 75 L 255 75', stroke: 'black', 'marker-end': 'url(#arrow)' }],
+        ['path', { d: 'M 125 75 L 137.5 75 L 163.75 75 L 190 75 L 216.25 75 L 242.5 75 L 255 75', stroke: 'black', 'marker-end': 'url(#arrow)', fill: 'none' }],
         ['svg', { x: '150', y: '64.5', width: '80', height: '20' },
           ['rect', { width: '80', height: '20', fill: 'gray' }],
           ['text', { x: '50%', y: '50%', 'text-anchor': 'middle', 'dominant-baseline': 'central', 'stroke': 'black' }, 'hello world']

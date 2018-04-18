@@ -86,7 +86,12 @@ describe('generate SVG', () => {
           type: 'DIRECTED',
           id: 'e3',
           sources: [ 'n1' ],
-          targets: [ 'n1' ]
+          targets: [ 'n1' ],
+          labels: [{
+            text: 'hello world',
+            width: 100,
+            height: 20
+          }]
         }
       ]
     }

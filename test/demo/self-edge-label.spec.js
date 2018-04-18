@@ -44,7 +44,7 @@ describe('generate SVG', () => {
           targets: ['n2'],
           labels: [
             {
-              width: 800,
+              width: 80,
               height: 20,
               text: 'world'
             }
