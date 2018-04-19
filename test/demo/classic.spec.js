@@ -11,8 +11,7 @@ describe('generate SVG', () => {
       id: 'root',
       layoutOptions: {
         'elk.direction': 'DOWN',
-        'elk.layered.crossingMinimization.semiInteractive': true,
-        'elk.layered.crossingMinimization.strategy': 'INTERACTIVE'
+        'elk.layered.crossingMinimization.semiInteractive': true
       },
       children: [
         {
@@ -38,21 +37,21 @@ describe('generate SVG', () => {
           width: 100,
           height: 50,
           labels: [{ text: 'Laptop' }],
-          layoutOptions: { 'elk.position': '[x=0,y=0]' }
+          layoutOptions: { 'elk.position': '(1,0)' }
         },
         {
           id: 'n5',
           width: 100,
           height: 50,
           labels: [{ text: 'iPhone' }],
-          layoutOptions: { 'elk.position': '[x=1,y=0]' }
+          layoutOptions: { 'elk.position': '(2,0)' }
         },
         {
           id: 'n6',
           width: 100,
           height: 50,
           labels: [{ text: 'Car' }],
-          layoutOptions: { 'elk.position': '[x=2,y=0]' }
+          layoutOptions: { 'elk.position': '(3,0)' }
         }
       ],
       edges: [
