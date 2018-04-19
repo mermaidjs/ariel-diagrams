@@ -16,6 +16,19 @@ const elk = new ELK({
   }
 })
 
+const defaultSizeOptions = {
+  node: { width: 100, height: 50 }
+}
+export const preprocess = node => {
+  if (R.isNil(node.children) || R.isEmpty(node.children)) {
+    node.width = node.width || defaultSizeOptions.node.width
+    node.height = node.height || defaultSizeOptions.node.height
+  } else { // has children
+    node.children = R.map(c => preprocess(c), node.children)
+  }
+  return node
+}
+
 const createNode = n => {
   // node
   const node = new X('svg', R.pick(['x', 'y', 'width', 'height'], n))
@@ -84,8 +97,9 @@ const createNode = n => {
 }
 
 export const graph2svg = async (graph) => {
+  graph = preprocess(graph)
   const root = await elk.layout(graph)
-  console.log(JSON.stringify(root, null, 2))
+  // console.log(JSON.stringify(root, null, 2))
   const rootNode = createNode(root)
   rootNode.delete(['x', 'y'])
   rootNode.update({ xmlns: 'http://www.w3.org/2000/svg' })
