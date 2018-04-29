@@ -16,10 +16,10 @@ const defaultSizeOptions = {
   edgeLabel: { width: 60, height: 20 }
 }
 export const preprocess = node => {
+  // preprocess nodes
   if (R.isNil(node.id)) {
     node.id = uuid()
   }
-
   if (R.isNil(node.children) || R.isEmpty(node.children)) {
     node.width = node.width || defaultSizeOptions.node.width
     node.height = node.height || defaultSizeOptions.node.height
@@ -27,8 +27,12 @@ export const preprocess = node => {
     node.children = R.map(c => preprocess(c), node.children)
   }
 
+  // preprocess edges
   if (!R.isNil(node.edges) && !R.isEmpty(node.edges)) {
     node.edges = R.map(edge => {
+      if (R.isNil(edge.id)) {
+        edge.id = uuid()
+      }
       if (!R.isNil(edge.labels) && !R.isEmpty(edge.labels)) {
         edge.labels = R.map(label => {
           label.width = label.width || defaultSizeOptions.edgeLabel.width

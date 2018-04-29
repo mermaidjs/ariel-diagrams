@@ -8,7 +8,6 @@ import { graph2svg } from '../../src/index'
 describe('generate SVG', () => {
   test('hello world', async () => {
     const graph = {
-      id: 'root',
       layoutOptions: {
         'elk.direction': 'DOWN',
         'elk.layered.crossingMinimization.semiInteractive': true
@@ -44,34 +43,29 @@ describe('generate SVG', () => {
       ],
       edges: [
         {
-          id: 'e1',
           sources: ['n1'],
           targets: ['n2'],
           type: 'DIRECTED',
           labels: [{ width: 80, text: 'Get money' }]
         },
         {
-          id: 'e2',
           sources: ['n2'],
           targets: ['n3'],
           type: 'DIRECTED'
         },
         {
-          id: 'e3',
           sources: ['n3'],
           targets: ['n4'],
           type: 'DIRECTED',
           labels: [{ text: 'One' }]
         },
         {
-          id: 'e4',
           sources: ['n3'],
           targets: ['n5'],
           type: 'DIRECTED',
           labels: [{ text: 'Two' }]
         },
         {
-          id: 'e5',
           sources: ['n3'],
           targets: ['n6'],
           type: 'DIRECTED',
