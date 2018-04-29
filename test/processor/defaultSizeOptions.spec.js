@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import { preprocess } from '../../src/index'
+import { preprocess } from '../../src/utils'
 
 describe('processor', () => {
   test('explicit node size', () => {

@@ -48,7 +48,7 @@ describe('generate SVG', () => {
           sources: ['n1'],
           targets: ['n2'],
           type: 'DIRECTED',
-          labels: [{ width: 80, height: 20, text: 'Get money' }]
+          labels: [{ width: 80, text: 'Get money' }]
         },
         {
           id: 'e2',
@@ -61,21 +61,21 @@ describe('generate SVG', () => {
           sources: ['n3'],
           targets: ['n4'],
           type: 'DIRECTED',
-          labels: [{ width: 60, height: 20, text: 'One' }]
+          labels: [{ text: 'One' }]
         },
         {
           id: 'e4',
           sources: ['n3'],
           targets: ['n5'],
           type: 'DIRECTED',
-          labels: [{ width: 60, height: 20, text: 'Two' }]
+          labels: [{ text: 'Two' }]
         },
         {
           id: 'e5',
           sources: ['n3'],
           targets: ['n6'],
           type: 'DIRECTED',
-          labels: [{ width: 60, height: 20, text: 'Three' }]
+          labels: [{ text: 'Three' }]
         }
       ]
     }

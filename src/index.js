@@ -2,7 +2,7 @@ import ELK from 'elkjs'
 import * as R from 'ramda'
 
 import X from './xml/Element'
-import { hasDirectedEdge } from './utils'
+import { hasDirectedEdge, preprocess } from './utils'
 
 const elk = new ELK({
   defaultLayoutOptions: {
@@ -15,19 +15,6 @@ const elk = new ELK({
     'elk.edgeRouting': 'SPLINES' // https://github.com/eclipse/elk/blob/master/plugins/org.eclipse.elk.core/src/org/eclipse/elk/core/options/EdgeRouting.java
   }
 })
-
-const defaultSizeOptions = {
-  node: { width: 100, height: 50 }
-}
-export const preprocess = node => {
-  if (R.isNil(node.children) || R.isEmpty(node.children)) {
-    node.width = node.width || defaultSizeOptions.node.width
-    node.height = node.height || defaultSizeOptions.node.height
-  } else { // has children
-    node.children = R.map(c => preprocess(c), node.children)
-  }
-  return node
-}
 
 const createNode = n => {
   // node
