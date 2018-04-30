@@ -3,18 +3,19 @@ import * as R from 'ramda'
 
 import X from './xml/Element'
 import { hasDirectedEdge, preprocess } from './utils'
+import { defaultLayoutOptions, defaultSizeOptions } from './constants'
 
-const elk = new ELK({
-  defaultLayoutOptions: {
-    'elk.algorithm': 'layered',
-    'elk.direction': 'RIGHT',
-    'elk.padding': '[top=25,left=25,bottom=25,right=25]',
-    'elk.spacing.componentComponent': 25, // unconnected nodes are individual subgraphs, referred to as named components
-    'elk.layered.spacing.nodeNodeBetweenLayers': 25, // this has effect, but only if there are edges.
-    'elk.edgeLabels.inline': true,
-    'elk.edgeRouting': 'SPLINES' // https://github.com/eclipse/elk/blob/master/plugins/org.eclipse.elk.core/src/org/eclipse/elk/core/options/EdgeRouting.java
-  }
-})
+// const elk = new ELK({
+//   defaultLayoutOptions: {
+//     'elk.algorithm': 'layered',
+//     'elk.direction': 'RIGHT',
+//     'elk.padding': '[top=25,left=25,bottom=25,right=25]',
+//     'elk.spacing.componentComponent': 25, // unconnected nodes are individual subgraphs, referred to as named components
+//     'elk.layered.spacing.nodeNodeBetweenLayers': 25, // this has effect, but only if there are edges.
+//     'elk.edgeLabels.inline': true,
+//     'elk.edgeRouting': 'SPLINES' // https://github.com/eclipse/elk/blob/master/plugins/org.eclipse.elk.core/src/org/eclipse/elk/core/options/EdgeRouting.java
+//   }
+// })
 
 const createNode = n => {
   // node
@@ -83,10 +84,17 @@ const createNode = n => {
   return node
 }
 
-export const graph2svg = async (graph) => {
-  graph = preprocess(graph)
+export const graph2svg = async (graph, defaultOptions = {}) => {
+  if (R.isNil(defaultOptions.layout)) {
+    defaultOptions.layout = {}
+  }
+  if (R.isNil(defaultOptions.size)) {
+    defaultOptions.size = {}
+  }
+  graph = preprocess(graph, R.merge(defaultSizeOptions, defaultOptions.size))
+  const elk = new ELK({ defaultLayoutOptions: R.merge(defaultLayoutOptions, defaultOptions.layout) })
   const root = await elk.layout(graph)
-  // console.log(JSON.stringify(root, null, 2))
+  console.log(JSON.stringify(root, null, 2))
   const rootNode = createNode(root)
   rootNode.delete(['x', 'y'])
   rootNode.update({ xmlns: 'http://www.w3.org/2000/svg' })

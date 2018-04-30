@@ -5,7 +5,7 @@ import xmlFormat from 'xml-formatter'
 
 import { graph2svg } from '../../src/index'
 
-describe('generate SVG', () => {
+describe('compact graph syntax', () => {
   test('hello world', async () => {
     const graph = {
       layoutOptions: {
