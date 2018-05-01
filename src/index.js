@@ -88,8 +88,8 @@ export const graph2elk = (graph, defaultOptions = {}) => {
   const elkGraph = preprocess(graph, R.merge(defaultSizeOptions, defaultOptions.size))
   const layoutOptions = R.merge(defaultLayoutOptions, defaultOptions.layout)
   if (log.getLevel() <= log.levels.DEBUG) {
-    console.log(elkGraph)
-    console.log(layoutOptions)
+    console.log(JSON.stringify(elkGraph, null, 2))
+    console.log(JSON.stringify(layoutOptions, null, 2))
   }
   return { elkGraph, layoutOptions }
 }
@@ -98,7 +98,7 @@ export const graph2svg = async (graph, defaultOptions = {}) => {
   const { elkGraph, layoutOptions } = graph2elk(graph, defaultOptions)
   const root = await elk.layout(elkGraph, layoutOptions)
   if (log.getLevel() <= log.levels.DEBUG) {
-    console.log(root)
+    console.log(JSON.stringify(root, null, 2))
   }
   const rootNode = createNode(root)
   rootNode.delete(['x', 'y'])

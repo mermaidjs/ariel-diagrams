@@ -28,4 +28,68 @@ describe('graph to elk', () => {
     expect(R.omit(['id'], elkGraph)).toEqual({ width: 140, height: 70 })
     expect(layoutOptions).toEqual(defaultLayoutOptions)
   })
+
+  describe('inheritance', () => {
+    test('empty', () => {
+      const graph = {
+        children: [
+          {
+          }
+        ]
+      }
+      const { elkGraph, layoutOptions } = graph2elk(graph)
+      expect(R.omit(['id'], elkGraph.children[0])).toEqual({ width: 100, height: 50 })
+      expect(layoutOptions).toEqual(defaultLayoutOptions)
+    })
+
+    test('inherit size', () => {
+      const graph = {
+        sizeOptions: {
+          node: {
+            width: 120,
+            height: 60
+          }
+        },
+        children: [
+          {
+          },
+          {
+          }
+        ]
+      }
+      const { elkGraph, layoutOptions } = graph2elk(graph)
+      expect(R.omit(['id'], elkGraph.children[0])).toEqual({ width: 120, height: 60 })
+      expect(R.omit(['id'], elkGraph.children[1])).toEqual({ width: 120, height: 60 })
+      expect(layoutOptions).toEqual(defaultLayoutOptions)
+    })
+
+    test('multiple level inherit size', () => {
+      const graph = {
+        sizeOptions: {
+          node: {
+            width: 120,
+            height: 60
+          }
+        },
+        children: [
+          {
+            children: [
+              {
+                children: [
+                  {
+                  },
+                  {
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+      const { elkGraph, layoutOptions } = graph2elk(graph)
+      expect(R.omit(['id'], elkGraph.children[0].children[0].children[0])).toEqual({ width: 120, height: 60 })
+      expect(R.omit(['id'], elkGraph.children[0].children[0].children[1])).toEqual({ width: 120, height: 60 })
+      expect(layoutOptions).toEqual(defaultLayoutOptions)
+    })
+  })
 })
