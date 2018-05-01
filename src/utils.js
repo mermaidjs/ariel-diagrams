@@ -14,7 +14,7 @@ export const hasDirectedEdge = node => {
 }
 
 export const preprocess = (node, defaultSizeOptions = constantSizeOptions) => {
-  const sizeOptions = R.merge(defaultSizeOptions, node.sizeOptions)
+  const sizeOptions = R.mergeDeepRight(defaultSizeOptions, node.sizeOptions || {})
 
   // preprocess nodes
   if (R.isNil(node.id)) {

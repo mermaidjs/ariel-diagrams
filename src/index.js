@@ -79,14 +79,8 @@ const createNode = n => {
 }
 
 export const graph2elk = (graph, defaultOptions = {}) => {
-  if (R.isNil(defaultOptions.layout)) {
-    defaultOptions.layout = {}
-  }
-  if (R.isNil(defaultOptions.size)) {
-    defaultOptions.size = {}
-  }
-  const elkGraph = preprocess(graph, R.merge(defaultSizeOptions, defaultOptions.size))
-  const layoutOptions = R.merge(defaultLayoutOptions, defaultOptions.layout)
+  const elkGraph = preprocess(graph, R.mergeDeepRight(defaultSizeOptions, defaultOptions.size || {}))
+  const layoutOptions = R.mergeDeepRight(defaultLayoutOptions, defaultOptions.layout || {})
   if (log.getLevel() <= log.levels.DEBUG) {
     console.log(JSON.stringify(elkGraph, null, 2))
     console.log(JSON.stringify(layoutOptions, null, 2))

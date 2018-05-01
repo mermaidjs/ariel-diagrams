@@ -26,7 +26,7 @@ class Element {
 
   update (attributes) {
     this._normalizeAttribues()
-    this.attributes = R.merge(this.attributes, attributes)
+    this.attributes = R.merge(this.attributes, attributes || {})
     return this
   }
 

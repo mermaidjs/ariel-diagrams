@@ -91,5 +91,40 @@ describe('graph to elk', () => {
       expect(R.omit(['id'], elkGraph.children[0].children[0].children[1])).toEqual({ width: 120, height: 60 })
       expect(layoutOptions).toEqual(defaultLayoutOptions)
     })
+
+    test('override inheritance', () => {
+      const graph = {
+        sizeOptions: {
+          node: {
+            width: 120,
+            height: 60
+          }
+        },
+        children: [
+          {
+            children: [
+              {
+                sizeOptions: {
+                  node: {
+                    width: 140
+                  }
+                },
+                children: [
+                  {
+                  },
+                  {
+                    width: 160
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+      const { elkGraph, layoutOptions } = graph2elk(graph)
+      expect(R.omit(['id'], elkGraph.children[0].children[0].children[0])).toEqual({ width: 140, height: 60 })
+      expect(R.omit(['id'], elkGraph.children[0].children[0].children[1])).toEqual({ width: 160, height: 60 })
+      expect(layoutOptions).toEqual(defaultLayoutOptions)
+    })
   })
 })
