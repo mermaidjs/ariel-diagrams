@@ -11,8 +11,10 @@
   },
   "dependencies": {
     "elkjs": "^0.3.0",
+    "loglevel": "^1.6.1",
     "ramda": "^0.25.0",
-    "uuid": "^3.2.1"
+    "uuid": "^3.2.1",
+    "xml-formatter": "^1.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -21,7 +23,6 @@
     "jest": "^22.4.3",
     "onml": "^0.4.1",
     "standard": "^11.0.1",
-    "xml-formatter": "^1.0.1",
     "yarn-upgrade-all": "^0.3.0"
   }
 }

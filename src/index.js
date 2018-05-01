@@ -1,21 +1,13 @@
 import ELK from 'elkjs'
 import * as R from 'ramda'
+import * as logLevel from 'loglevel'
+import xmlFormat from 'xml-formatter'
 
 import X from './xml/Element'
 import { hasDirectedEdge, preprocess } from './utils'
 import { defaultLayoutOptions, defaultSizeOptions } from './constants'
 
-// const elk = new ELK({
-//   defaultLayoutOptions: {
-//     'elk.algorithm': 'layered',
-//     'elk.direction': 'RIGHT',
-//     'elk.padding': '[top=25,left=25,bottom=25,right=25]',
-//     'elk.spacing.componentComponent': 25, // unconnected nodes are individual subgraphs, referred to as named components
-//     'elk.layered.spacing.nodeNodeBetweenLayers': 25, // this has effect, but only if there are edges.
-//     'elk.edgeLabels.inline': true,
-//     'elk.edgeRouting': 'SPLINES' // https://github.com/eclipse/elk/blob/master/plugins/org.eclipse.elk.core/src/org/eclipse/elk/core/options/EdgeRouting.java
-//   }
-// })
+const log = logLevel.getLogger('ariel/index')
 
 const createNode = n => {
   // node
@@ -84,17 +76,28 @@ const createNode = n => {
   return node
 }
 
-export const graph2svg = async (graph, defaultOptions = {}) => {
+export const graph2elk = (graph, defaultOptions = {}) => {
   if (R.isNil(defaultOptions.layout)) {
     defaultOptions.layout = {}
   }
   if (R.isNil(defaultOptions.size)) {
     defaultOptions.size = {}
   }
-  graph = preprocess(graph, R.merge(defaultSizeOptions, defaultOptions.size))
+  const elkGraph = preprocess(graph, R.merge(defaultSizeOptions, defaultOptions.size))
   const elk = new ELK({ defaultLayoutOptions: R.merge(defaultLayoutOptions, defaultOptions.layout) })
-  const root = await elk.layout(graph)
-  console.log(JSON.stringify(root, null, 2))
+  if (log.getLevel() <= log.levels.DEBUG) {
+    console.log(elk.defaultLayoutOptions)
+    console.log(elkGraph)
+  }
+  return { elk, elkGraph }
+}
+
+export const graph2svg = async (graph, defaultOptions = {}) => {
+  const { elk, elkGraph } = graph2elk(graph, defaultOptions)
+  const root = await elk.layout(elkGraph)
+  if (log.getLevel() <= log.levels.DEBUG) {
+    console.log(root)
+  }
   const rootNode = createNode(root)
   rootNode.delete(['x', 'y'])
   rootNode.update({ xmlns: 'http://www.w3.org/2000/svg' })
@@ -109,5 +112,9 @@ export const graph2svg = async (graph, defaultOptions = {}) => {
         new X('path', { d: 'M 0 0 L 0 6 L 8 3 Z' }))))
   }
 
-  return rootNode.toString()
+  const svg = rootNode.toString()
+  if (log.getLevel() <= log.levels.DEBUG) {
+    console.log(xmlFormat(svg))
+  }
+  return svg
 }
