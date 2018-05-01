@@ -9,6 +9,8 @@ import { defaultLayoutOptions, defaultSizeOptions } from './constants'
 
 const log = logLevel.getLogger('ariel/index')
 
+const elk = new ELK()
+
 const createNode = n => {
   // node
   const node = new X('svg', R.pick(['x', 'y', 'width', 'height'], n))
@@ -84,17 +86,17 @@ export const graph2elk = (graph, defaultOptions = {}) => {
     defaultOptions.size = {}
   }
   const elkGraph = preprocess(graph, R.merge(defaultSizeOptions, defaultOptions.size))
-  const elk = new ELK({ defaultLayoutOptions: R.merge(defaultLayoutOptions, defaultOptions.layout) })
+  const layoutOptions = R.merge(defaultLayoutOptions, defaultOptions.layout)
   if (log.getLevel() <= log.levels.DEBUG) {
-    console.log(elk.defaultLayoutOptions)
     console.log(elkGraph)
+    console.log(layoutOptions)
   }
-  return { elk, elkGraph }
+  return { elkGraph, layoutOptions }
 }
 
 export const graph2svg = async (graph, defaultOptions = {}) => {
-  const { elk, elkGraph } = graph2elk(graph, defaultOptions)
-  const root = await elk.layout(elkGraph)
+  const { elkGraph, layoutOptions } = graph2elk(graph, defaultOptions)
+  const root = await elk.layout(elkGraph, layoutOptions)
   if (log.getLevel() <= log.levels.DEBUG) {
     console.log(root)
   }
