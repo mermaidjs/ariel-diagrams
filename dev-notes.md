@@ -11,3 +11,12 @@
 - 继承与覆盖
     - *Options 被 children 自动继承
     - children 可以定义 *Options 覆盖 继承来的 options
+
+
+## How to enable log
+
+```js
+import * as logLevel from 'loglevel'
+
+logLevel.getLogger('ariel/index').setLevel('DEBUG')
+```

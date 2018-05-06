@@ -11,7 +11,7 @@ const log = logLevel.getLogger('ariel/index')
 
 const elk = new ELK()
 
-const createNode = n => {
+const createNode = (n, defaultLayoutOptions) => {
   // node
   const node = new X('svg', R.pick(['x', 'y', 'width', 'height'], n))
   const strokeWidth = 1
@@ -27,7 +27,7 @@ const createNode = n => {
     R.forEach(l => {
       let text = new X('text', { x: '50%', y: '50%', 'text-anchor': 'middle', 'dominant-baseline': 'central', stroke: 'black' }, l.text)
       if (!R.isNil(n.children) && !R.isEmpty(n.children)) { // has children, put label on top
-        const padding = R.path(['layoutOptions', 'elk.padding'], node) || R.path(['defaultLayoutOptions', 'elk.padding'], elk)
+        const padding = R.path(['layoutOptions', 'elk.padding'], node) || R.path(['elk.padding'], defaultLayoutOptions)
         const paddingTop = padding.split(/top=/)[1].split(',')[0]
         text = new X('svg', { width: n.width, height: paddingTop }, text)
       }
@@ -38,7 +38,7 @@ const createNode = n => {
   // sub nodes, recursive
   if (!R.isNil(n.children) && !R.isEmpty(n.children)) {
     R.forEach(subN => {
-      const subNode = createNode(subN)
+      const subNode = createNode(subN, defaultLayoutOptions)
       node.append(subNode)
     }, n.children)
   }
@@ -95,7 +95,7 @@ export const graph2svg = async (graph, defaultOptions = {}) => {
   if (log.getLevel() <= log.levels.DEBUG) {
     console.log(JSON.stringify(root, null, 2))
   }
-  const rootNode = createNode(root)
+  const rootNode = createNode(root, layoutOptions)
   rootNode.delete(['x', 'y'])
   rootNode.update({ xmlns: 'http://www.w3.org/2000/svg' })
 
