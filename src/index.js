@@ -79,8 +79,9 @@ const createNode = n => {
 }
 
 export const graph2elk = (graph, defaultOptions = {}) => {
-  const elkGraph = preprocess(graph, R.mergeDeepRight(defaultSizeOptions, defaultOptions.size || {}))
   const layoutOptions = R.mergeDeepRight(defaultLayoutOptions, defaultOptions.layout || {})
+  const sizeOptions = R.mergeDeepRight(defaultSizeOptions, defaultOptions.size || {})
+  const elkGraph = preprocess(graph, sizeOptions, layoutOptions)
   if (log.getLevel() <= log.levels.DEBUG) {
     console.log(JSON.stringify(elkGraph, null, 2))
     console.log(JSON.stringify(layoutOptions, null, 2))

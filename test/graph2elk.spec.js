@@ -127,4 +127,41 @@ describe('graph to elk', () => {
       expect(layoutOptions).toEqual(defaultLayoutOptions)
     })
   })
+
+  describe('layoutOptions', () => {
+    test('simple', () => {
+      const graph = {
+        layoutOptions: {
+          'elk.direction': 'DOWN'
+        },
+        children: [
+          {
+            children: [
+              {
+                layoutOptions: {
+                  'elk.direction': 'UP'
+                },
+                children: [
+                  {
+                  },
+                  {
+                    layoutOptions: {
+                      'elk.direction': 'RIGHT'
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+      const { elkGraph, layoutOptions } = graph2elk(graph)
+      expect(elkGraph.layoutOptions['elk.direction']).toBe('DOWN')
+      expect(elkGraph.children[0].layoutOptions['elk.direction']).toBe('DOWN')
+      expect(elkGraph.children[0].children[0].layoutOptions['elk.direction']).toBe('UP')
+      expect(elkGraph.children[0].children[0].children[0].layoutOptions['elk.direction']).toBe('UP')
+      expect(elkGraph.children[0].children[0].children[1].layoutOptions).toBeUndefined()
+      expect(layoutOptions).toEqual(defaultLayoutOptions)
+    })
+  })
 })

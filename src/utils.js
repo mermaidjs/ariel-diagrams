@@ -1,7 +1,7 @@
 import * as R from 'ramda'
 import uuid from 'uuid/v1'
 
-import { defaultSizeOptions as constantSizeOptions } from './constants'
+import { defaultSizeOptions as constantSizeOptions, defaultLayoutOptions as constantLayoutOptions } from './constants'
 
 export const hasDirectedEdge = node => {
   if (node.edges && R.any(e => e.type === 'DIRECTED', node.edges)) {
@@ -13,7 +13,17 @@ export const hasDirectedEdge = node => {
   return false
 }
 
-export const preprocess = (node, defaultSizeOptions = constantSizeOptions) => {
+export const preprocess = (node, defaultSizeOptions = constantSizeOptions, defaultLayoutOptions = constantLayoutOptions, parentLayoutOptions = {}) => {
+  const layoutOptions = R.pipe(
+    R.mergeDeepRight(parentLayoutOptions), // inherit parent layoutOptions
+    R.pickBy((val, key) => !R.isNil(val) && val !== defaultLayoutOptions[key]) // Omit default values
+  )(node.layoutOptions || {})
+  if (R.isEmpty(layoutOptions)) {
+    delete node['layoutOptions']
+  } else {
+    node.layoutOptions = layoutOptions
+  }
+
   const sizeOptions = R.mergeDeepRight(defaultSizeOptions, node.sizeOptions || {})
 
   // preprocess nodes
@@ -24,7 +34,7 @@ export const preprocess = (node, defaultSizeOptions = constantSizeOptions) => {
     node.width = node.width || sizeOptions.node.width
     node.height = node.height || sizeOptions.node.height
   } else { // has children
-    node.children = R.map(c => preprocess(c, sizeOptions), node.children)
+    node.children = R.map(c => preprocess(c, sizeOptions, defaultLayoutOptions, layoutOptions), node.children)
   }
 
   // preprocess edges
