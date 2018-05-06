@@ -1,11 +1,8 @@
 /* eslint-env jest */
-import * as logLevel from 'loglevel'
 import * as R from 'ramda'
 
 import { graph2elk } from '../src/index'
 import { defaultLayoutOptions } from '../src/constants'
-
-logLevel.getLogger('ariel/index').setLevel('DEBUG')
 
 describe('graph to elk', () => {
   test('empty', () => {
