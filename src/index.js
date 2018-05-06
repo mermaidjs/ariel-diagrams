@@ -90,7 +90,7 @@ export const graph2elk = (graph, defaultOptions = {}) => {
 
 export const graph2svg = async (graph, defaultOptions = {}) => {
   const { elkGraph, layoutOptions } = graph2elk(graph, defaultOptions)
-  const root = await elk.layout(elkGraph, layoutOptions)
+  const root = await elk.layout(elkGraph, { layoutOptions })
   if (log.getLevel() <= log.levels.DEBUG) {
     console.log(JSON.stringify(root, null, 2))
   }
