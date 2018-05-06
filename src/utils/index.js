@@ -1,7 +1,7 @@
 import * as R from 'ramda'
 import uuid from 'uuid/v1'
 
-import { defaultSizeOptions as constantSizeOptions, defaultLayoutOptions as constantLayoutOptions } from './constants'
+import { defaultSizeOptions as constantSizeOptions, defaultLayoutOptions as constantLayoutOptions } from '../constants'
 
 export const hasDirectedEdge = node => {
   if (node.edges && R.any(e => e.type === 'DIRECTED', node.edges)) {
