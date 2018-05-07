@@ -5,6 +5,7 @@ import xmlFormat from 'xml-formatter'
 
 import X from './xml/Element'
 import { uniqMarkers, preprocess } from './utils'
+import { simplifyPath } from './utils/edge'
 import { defaultLayoutOptions, defaultSizeOptions, defaultMarkers } from './constants'
 
 const log = logLevel.getLogger('ariel/index')
@@ -48,11 +49,11 @@ const createNode = (n, defaultLayoutOptions) => {
     R.forEach(e => {
       const d = R.pipe(
         R.map(s => {
-          let path = `M ${s.startPoint.x} ${s.startPoint.y}`
+          const points = simplifyPath([s.startPoint, ...(s.bendPoints || []), s.endPoint])
+          let path = `M ${points[0].x} ${points[0].y}`
           R.forEach(p => {
             path += ` L ${p.x} ${p.y}`
-          }, s.bendPoints || [])
-          path += ` L ${s.endPoint.x} ${s.endPoint.y}`
+          }, R.tail(points))
           return path
         }),
         R.join(' ')
