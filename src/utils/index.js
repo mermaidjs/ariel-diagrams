@@ -13,6 +13,20 @@ export const uniqMarkers = node => {
   )(markers)
 }
 
+export const preprocessLabel = element => {
+  if (R.isNil(element.labels) && !R.isNil(element.label)) {
+    let labels = element.label
+    if (typeof labels === 'string') {
+      labels = { text: labels }
+    }
+    if (!Array.isArray(labels)) {
+      labels = [labels]
+    }
+    element.labels = labels
+  }
+  return element
+}
+
 export const preprocess = (node, defaultSizeOptions = constantSizeOptions, defaultLayoutOptions = constantLayoutOptions, parentLayoutOptions = {}) => {
   const layoutOptions = R.pipe(
     R.mergeDeepRight(parentLayoutOptions), // inherit parent layoutOptions
@@ -30,6 +44,9 @@ export const preprocess = (node, defaultSizeOptions = constantSizeOptions, defau
   if (R.isNil(node.id)) {
     node.id = uuid()
   }
+
+  node = preprocessLabel(node)
+
   if (R.isNil(node.children) || R.isEmpty(node.children)) {
     node.width = node.width || sizeOptions.node.width
     node.height = node.height || sizeOptions.node.height
@@ -43,6 +60,8 @@ export const preprocess = (node, defaultSizeOptions = constantSizeOptions, defau
       if (R.isNil(edge.id)) {
         edge.id = uuid()
       }
+
+      edge = preprocessLabel(edge)
 
       // parse edge expr
       if (!R.isNil(edge.expr)) {

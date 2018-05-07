@@ -18,51 +18,51 @@ describe('compact graph syntax', () => {
       children: [
         {
           id: 'n1',
-          labels: [{ text: 'Chrismas' }]
+          label: 'Chrismas'
         },
         {
           id: 'n2',
-          labels: [{ text: 'Go shopping' }]
+          label: 'Go shopping'
         },
         {
           id: 'n3',
-          labels: [{ text: 'Let me think' }]
+          label: 'Let me think'
         },
         {
           id: 'n4',
-          labels: [{ text: 'Laptop' }],
+          label: 'Laptop',
           layoutOptions: { 'elk.position': '(1,0)' }
         },
         {
           id: 'n5',
-          labels: [{ text: 'iPhone' }],
+          label: 'iPhone',
           layoutOptions: { 'elk.position': '(2,0)' }
         },
         {
           id: 'n6',
-          labels: [{ text: 'Car' }],
+          label: 'Car',
           layoutOptions: { 'elk.position': '(3,0)' }
         }
       ],
       edges: [
         {
           expr: 'n1 ==> n2',
-          labels: [{ width: 80, text: 'Get money' }]
+          label: { width: 80, text: 'Get money' }
         },
         {
           expr: 'n2 ==> n3'
         },
         {
           expr: 'n3 ==> n4',
-          labels: [{ text: 'One' }]
+          label: 'One'
         },
         {
           expr: 'n3 ==> n5',
-          labels: [{ text: 'Two' }]
+          label: 'Two'
         },
         {
           expr: 'n3 ==> n6',
-          labels: [{ text: 'Three' }]
+          label: 'Three'
         }
       ]
     }
