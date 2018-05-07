@@ -65,4 +65,26 @@ describe('edge expr', () => {
       ]
     })
   })
+
+  test('numbers in id', () => {
+    const edge = parseEdgeExpr('n1  <  =  <  =  >  n2')
+    expect(edge).toEqual({
+      sources: ['n1'],
+      targets: ['n2'],
+      markers: [
+        {
+          id: '<',
+          position: 'start'
+        },
+        {
+          id: '<',
+          position: 'mid'
+        },
+        {
+          id: '>',
+          position: 'end'
+        }
+      ]
+    })
+  })
 })

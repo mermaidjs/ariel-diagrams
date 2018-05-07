@@ -2,8 +2,11 @@
 import fs from 'fs'
 import path from 'path'
 import xmlFormat from 'xml-formatter'
+// import * as logLevel from 'loglevel'
 
 import { graph2svg } from '../../src/index'
+
+// logLevel.getLogger('ariel/index').setLevel('DEBUG')
 
 describe('compact graph syntax', () => {
   test('hello world', async () => {
@@ -43,32 +46,22 @@ describe('compact graph syntax', () => {
       ],
       edges: [
         {
-          sources: ['n1'],
-          targets: ['n2'],
-          type: 'DIRECTED',
+          expr: 'n1 ==> n2',
           labels: [{ width: 80, text: 'Get money' }]
         },
         {
-          sources: ['n2'],
-          targets: ['n3'],
-          type: 'DIRECTED'
+          expr: 'n2 ==> n3'
         },
         {
-          sources: ['n3'],
-          targets: ['n4'],
-          type: 'DIRECTED',
+          expr: 'n3 ==> n4',
           labels: [{ text: 'One' }]
         },
         {
-          sources: ['n3'],
-          targets: ['n5'],
-          type: 'DIRECTED',
+          expr: 'n3 ==> n5',
           labels: [{ text: 'Two' }]
         },
         {
-          sources: ['n3'],
-          targets: ['n6'],
-          type: 'DIRECTED',
+          expr: 'n3 ==> n6',
           labels: [{ text: 'Three' }]
         }
       ]

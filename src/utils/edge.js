@@ -1,7 +1,7 @@
 import * as R from 'ramda'
 
 export const parseEdgeExpr = expr => {
-  const regex = /([A-Za-z_-]+)\s*([><]*)\s*=\s*([><]*)\s*=\s*([><]*)\s*([A-Za-z_-]+)/
+  const regex = /([A-Za-z0-9_-]+)\s*([><]*)\s*=\s*([><]*)\s*=\s*([><]*)\s*([A-Za-z0-9_-]+)/
   const [, source, start, mid, end, target] = R.match(regex, expr)
   const result = {
     sources: [source],
