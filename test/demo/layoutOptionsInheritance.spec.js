@@ -37,7 +37,12 @@ describe('layoutOptions inheritance', () => {
             {
               sources: ['n4'],
               targets: ['n5'],
-              type: 'DIRECTED',
+              markers: [
+                {
+                  id: '>',
+                  position: 'end'
+                }
+              ],
               labels: [{ text: 'One' }]
             }
           ]
@@ -47,13 +52,23 @@ describe('layoutOptions inheritance', () => {
         {
           sources: ['n1'],
           targets: ['n2'],
-          type: 'DIRECTED',
+          markers: [
+            {
+              id: '>',
+              position: 'end'
+            }
+          ],
           labels: [{ width: 80, text: 'Get money' }]
         },
         {
           sources: ['n2'],
           targets: ['n3'],
-          type: 'DIRECTED'
+          markers: [
+            {
+              id: '>',
+              position: 'end'
+            }
+          ]
         }
       ]
     }

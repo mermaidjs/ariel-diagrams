@@ -4,8 +4,8 @@ import * as logLevel from 'loglevel'
 import xmlFormat from 'xml-formatter'
 
 import X from './xml/Element'
-import { hasDirectedEdge, preprocess } from './utils'
-import { defaultLayoutOptions, defaultSizeOptions } from './constants'
+import { uniqMarkers, preprocess } from './utils'
+import { defaultLayoutOptions, defaultSizeOptions, defaultMarkers } from './constants'
 
 const log = logLevel.getLogger('ariel/index')
 
@@ -58,9 +58,9 @@ const createNode = (n, defaultLayoutOptions) => {
         R.join(' ')
       )(e.sections)
       const edge = new X('path', { d, stroke: 'black', fill: 'none' })
-      if (e.type === 'DIRECTED') {
-        edge.set('marker-end', 'url(#arrow)')
-      }
+      R.forEach(m => {
+        edge.set(`marker-${m.position}`, `url(#${m.id})`)
+      })(e.markers || [])
       node.append(edge)
 
       // edge label
@@ -103,10 +103,9 @@ export const graph2svg = async (graph, defaultOptions = {}) => {
   rootNode.shift()
 
   // arrow marker def
-  if (hasDirectedEdge(root)) {
-    rootNode.prepend(new X('defs', null,
-      new X('marker', { id: 'arrow', markerWidth: '8', markerHeight: '6', refX: '8', refY: '3', markerUnits: 'strokeWidth', orient: 'auto' },
-        new X('path', { d: 'M 0 0 L 0 6 L 8 3 Z' }))))
+  const markers = uniqMarkers(root)
+  if (!R.isEmpty(markers)) {
+    rootNode.prepend(new X('defs', null, markers.map(m => defaultMarkers[m])))
   }
 
   const svg = rootNode.toString()

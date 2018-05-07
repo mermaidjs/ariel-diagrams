@@ -1,3 +1,5 @@
+import X from './xml/Element'
+
 export const defaultLayoutOptions = {
   'elk.algorithm': 'layered',
   'elk.direction': 'RIGHT',
@@ -11,4 +13,11 @@ export const defaultLayoutOptions = {
 export const defaultSizeOptions = {
   node: { width: 100, height: 50 },
   edgeLabel: { width: 60, height: 20 }
+}
+
+export const defaultMarkers = {
+  '>': new X('marker', { id: '>', markerWidth: '8', markerHeight: '6', refX: '8', refY: '3', markerUnits: 'strokeWidth', orient: 'auto' },
+    new X('path', { d: 'M 0 0 L 0 6 L 8 3 Z' })),
+  '<': new X('marker', { id: '<', markerWidth: '8', markerHeight: '6', refX: '8', refY: '3', markerUnits: 'strokeWidth', orient: 'auto' },
+    new X('path', { d: 'M 0 0 L 0 6 L 8 3 Z' }))
 }

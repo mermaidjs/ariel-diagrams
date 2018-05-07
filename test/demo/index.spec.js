@@ -51,7 +51,12 @@ describe('generate SVG', () => {
           ],
           edges: [
             {
-              type: 'DIRECTED',
+              markers: [
+                {
+                  id: '>',
+                  position: 'end'
+                }
+              ],
               id: 'e2',
               sources: [ 'n1-2' ],
               targets: [ 'n1-1' ],
@@ -66,7 +71,12 @@ describe('generate SVG', () => {
       ],
       edges: [
         {
-          type: 'DIRECTED',
+          markers: [
+            {
+              id: '>',
+              position: 'end'
+            }
+          ],
           id: 'e1',
           sources: [ 'n0' ],
           targets: [ 'n1' ],
@@ -77,13 +87,23 @@ describe('generate SVG', () => {
           }]
         },
         {
-          type: 'DIRECTED',
+          markers: [
+            {
+              id: '>',
+              position: 'end'
+            }
+          ],
           id: 'e2',
           sources: [ 'n0' ],
           targets: [ 'n0' ]
         },
         {
-          type: 'DIRECTED',
+          markers: [
+            {
+              id: '>',
+              position: 'end'
+            }
+          ],
           id: 'e3',
           sources: [ 'n1' ],
           targets: [ 'n1' ],

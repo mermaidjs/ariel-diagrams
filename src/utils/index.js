@@ -3,14 +3,13 @@ import uuid from 'uuid/v1'
 
 import { defaultSizeOptions as constantSizeOptions, defaultLayoutOptions as constantLayoutOptions } from '../constants'
 
-export const hasDirectedEdge = node => {
-  if (node.edges && R.any(e => e.type === 'DIRECTED', node.edges)) {
-    return true
-  }
-  if (node.children && R.any(n => hasDirectedEdge(n), node.children)) {
-    return true
-  }
-  return false
+export const uniqMarkers = node => {
+  const markers = R.map(e => R.map(m => m.id, e.markers || []), node.edges || [])
+  return R.pipe(
+    R.concat(R.__, R.map(n => uniqMarkers(n), node.children || [])),
+    R.flatten,
+    R.uniq
+  )(markers)
 }
 
 export const preprocess = (node, defaultSizeOptions = constantSizeOptions, defaultLayoutOptions = constantLayoutOptions, parentLayoutOptions = {}) => {
