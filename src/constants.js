@@ -18,6 +18,6 @@ export const defaultSizeOptions = {
 export const defaultMarkers = {
   '>': new X('marker', { id: '>', markerWidth: '8', markerHeight: '6', refX: '8', refY: '3', markerUnits: 'strokeWidth', orient: 'auto' },
     new X('path', { d: 'M 0 0 L 0 6 L 8 3 Z' })),
-  '<': new X('marker', { id: '<', markerWidth: '8', markerHeight: '6', refX: '8', refY: '3', markerUnits: 'strokeWidth', orient: 'auto' },
-    new X('path', { d: 'M 0 0 L 0 6 L 8 3 Z' }))
+  '<': new X('marker', { id: '<', markerWidth: '8', markerHeight: '6', refX: '0', refY: '3', markerUnits: 'strokeWidth', orient: 'auto' },
+    new X('path', { d: 'M 0 3 L 8  6 L 8 0 Z' }))
 }
