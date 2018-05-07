@@ -1,5 +1,7 @@
 import * as R from 'ramda'
 
+import { escapeXml } from '../utils/xml'
+
 class Element {
   constructor (tagName, attributes, elementList) {
     this.tagName = tagName
@@ -72,7 +74,7 @@ class Element {
     }
     return ' ' + R.pipe(
       R.toPairs,
-      R.map(pair => `${pair[0]}="${pair[1]}"`),
+      R.map(pair => `${pair[0]}="${escapeXml(pair[1])}"`),
       R.join(' ')
     )(this.attributes)
   }

@@ -76,4 +76,8 @@ describe('XML Element', () => {
     element.shift()
     expect(element.toString()).toBe('<div>hello</div>')
   })
+
+  test('escape', () => {
+    expect(new Element('marker', { id: '&<>"\'' }).toString()).toBe('<marker id="&amp;&lt;&gt;&quot;&apos;"></marker>')
+  })
 })
