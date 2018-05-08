@@ -23,6 +23,7 @@ export const preprocessLabel = element => {
       labels = [labels]
     }
     element.labels = labels
+    delete element['label']
   }
   return element
 }
@@ -69,6 +70,7 @@ export const preprocess = (node, defaultSizeOptions = constantSizeOptions, defau
         edge.sources = edge.sources || sources
         edge.targets = edge.targets || targets
         edge.markers = edge.markers || markers
+        delete edge['expr']
       }
 
       if (!R.isNil(edge.labels) && !R.isEmpty(edge.labels)) {

@@ -7,10 +7,8 @@
     - for example: an user shape, a database shape: http://c4model.com/
     - don't limit the system to some common shapes. allow any <path/> as shape.
     - so we should draw rect, circle...etc as path, in order to be generic??
-- support dotted line and border
-- 继承与覆盖
-    - *Options 被 children 自动继承
-    - children 可以定义 *Options 覆盖 继承来的 options
+- postprocess elkGraph, remove unnecessary props
+- styleOptions, such as border color, dotted line edge
 
 
 ## How to enable log
