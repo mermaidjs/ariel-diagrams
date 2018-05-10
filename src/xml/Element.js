@@ -84,7 +84,7 @@ class Element {
       return ''
     }
     return R.pipe(
-      R.map(element => element.toString()),
+      R.map(element => typeof element === 'string' ? escapeXml(element) : element.toString()),
       R.join('')
     )(Array.isArray(this.elementList) ? this.elementList : [this.elementList])
   }

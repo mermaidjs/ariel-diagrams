@@ -78,6 +78,6 @@ describe('XML Element', () => {
   })
 
   test('escape', () => {
-    expect(new Element('marker', { id: '&<>"\'' }).toString()).toBe('<marker id="&amp;&lt;&gt;&quot;&apos;"></marker>')
+    expect(new Element('marker', { id: '&<>"\'' }, 'A & B').toString()).toBe('<marker id="&amp;&lt;&gt;&quot;&apos;">A &amp; B</marker>')
   })
 })
