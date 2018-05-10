@@ -2,3 +2,4 @@ node_modules/
 yarn-error.log
 output/
 package-lock.json
+dist/

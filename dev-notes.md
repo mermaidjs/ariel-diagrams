@@ -9,6 +9,8 @@
     - so we should draw rect, circle...etc as path, in order to be generic??
 - postprocess elkGraph, remove unnecessary props
 - styleOptions, such as border color, dotted line edge
+- Auto generate `layoutOptions: { 'elk.position': '(1,0)' }` so nodes are in order.
+    - Should take `direction` into consideration.
 
 
 ## How to enable log
