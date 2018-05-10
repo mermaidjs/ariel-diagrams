@@ -1,6 +1,6 @@
 {
   "name": "ariel-diagrams",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Create diagrams from text in a similar manner as markdown",
   "license": "MIT",
   "main": "src/index.js",
