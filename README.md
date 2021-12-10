@@ -29,7 +29,7 @@ const graph = {
     children: [
     {
         id: 'n1',
-        label: 'Chrismas'
+        label: 'Christmas'
     },
     {
         id: 'n2',

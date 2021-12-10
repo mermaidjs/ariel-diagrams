@@ -15,7 +15,7 @@ describe('layoutOptions inheritance', () => {
       children: [
         {
           id: 'n1',
-          labels: [{ text: 'Chrismas' }]
+          labels: [{ text: 'Christmas' }]
         },
         {
           id: 'n2',

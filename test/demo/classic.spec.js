@@ -18,7 +18,7 @@ describe('generate SVG', () => {
           id: 'n1',
           width: 100,
           height: 50,
-          labels: [{ text: 'Chrismas' }]
+          labels: [{ text: 'Christmas' }]
         },
         {
           id: 'n2',

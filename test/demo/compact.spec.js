@@ -18,7 +18,7 @@ describe('compact graph syntax', () => {
       children: [
         {
           id: 'n1',
-          label: 'Chrismas'
+          label: 'Christmas'
         },
         {
           id: 'n2',

@@ -15,7 +15,7 @@ describe('compact graph JSON format', () => {
           id: 'n1',
           width: 100,
           height: 50,
-          labels: [{ text: 'Chrismas' }]
+          labels: [{ text: 'Christmas' }]
         },
         {
           id: 'n2',
@@ -97,7 +97,7 @@ describe('compact graph JSON format', () => {
       children: [
         {
           id: 'n1',
-          labels: [{ text: 'Chrismas' }]
+          labels: [{ text: 'Christmas' }]
         },
         {
           id: 'n2',
