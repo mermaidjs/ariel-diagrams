@@ -88,7 +88,7 @@ describe('generate SVG', () => {
               position: 'end'
             }
           ],
-          labels: [{ width: 60, height: 20, text: 'One' }]
+          labels: [{ width: 80, height: 20, text: 'One' }]
         },
         {
           id: 'e4',
@@ -100,7 +100,7 @@ describe('generate SVG', () => {
               position: 'end'
             }
           ],
-          labels: [{ width: 60, height: 20, text: 'Two' }]
+          labels: [{ width: 80, height: 20, text: 'Two' }]
         },
         {
           id: 'e5',
@@ -112,7 +112,7 @@ describe('generate SVG', () => {
               position: 'end'
             }
           ],
-          labels: [{ width: 60, height: 20, text: 'Three' }]
+          labels: [{ width: 80, height: 20, text: 'Three' }]
         }
       ]
     }
